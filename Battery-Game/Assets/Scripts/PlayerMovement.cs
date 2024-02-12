@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     float maxSpeed = 6f;
     float turnAroundSpeed = 8f;
     float acceleration;
-    float friction = 8f;
+    float friction = 40f;
     float tolerence = 0.5f;
 
     bool grounded = true;
@@ -23,8 +23,14 @@ public class PlayerMovement : MonoBehaviour
     bool spaceDown;
     bool jumping = false;
 
+    public GameObject anchor;
+    public GameObject endCable;
+    Vector2 anchorDir;
+    float boundDistance = 1f;
+    float boundingForce = 10f;
+
     Rigidbody2D rb;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,9 +40,10 @@ public class PlayerMovement : MonoBehaviour
         acceleration = runSpeed;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        anchor.transform.position = transform.position;
         Move();
         Jump();
     }
@@ -60,19 +67,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //friction
-        if(rb.velocity.x < tolerence && rb.velocity.x > -tolerence)
+        if(rb.velocity.x < friction * Time.deltaTime && rb.velocity.x > -friction * Time.deltaTime)
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
             return;
         }
-        else if(rb.velocity.x > friction * Time.deltaTime)
+        else if(rb.velocity.x >= friction * Time.deltaTime)
         {
-            rb.velocity = new Vector2(rb.velocity.x - friction, rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x - friction * Time.deltaTime, rb.velocity.y);
             return;
         }
-        else if(rb.velocity.x < friction * Time.deltaTime)
+        else if(rb.velocity.x <= -friction * Time.deltaTime)
         {
-            rb.velocity = new Vector2(rb.velocity.x + friction, rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x + friction * Time.deltaTime, rb.velocity.y);
             return;
         }
         acceleration = runSpeed;
@@ -81,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, groundLayer);
         float distance = Mathf.Abs(hit.point.y - transform.position.y);
-        Debug.Log(distance);
 
         if(distance < groundDistance) { onGround = true; }
         else { onGround = false; }
@@ -100,6 +106,8 @@ public class PlayerMovement : MonoBehaviour
                 grounded = false;
             }
         }
+
+        Debug.Log(spaceDown);
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -121,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
             coyoteTime = 0f;
             jumpBuffer = 0f;
             jumping = true;
+            spaceDown = false;
             rb.AddForce(Vector2.up * jumpSpeed);
             rb.gravityScale = 1.5f;
         }

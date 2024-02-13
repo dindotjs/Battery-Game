@@ -41,6 +41,8 @@ public class Cable : MonoBehaviour
 
     void AddTension()
     {
+        //todo - add/remove tension from battery to closest point
+
         Vector2 direction = (points[points.Count - 2] - points[points.Count - 1]).normalized;
         float distance = (points[points.Count - 2] - points[points.Count - 1]).magnitude;
         RaycastHit2D hit = Physics2D.Raycast(points[points.Count - 1], direction, distance, hittable);

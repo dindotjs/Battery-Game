@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     float turnAroundSpeed = 8f;
     float acceleration;
     float friction = 40f;
+    bool facingRight = true;
 
     bool grounded = true;
     bool onGround;
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject batteryPlacer;
     bool canPickUp;
     bool holdingBattery = false;
+    Vector2 throwVector = new Vector2(3, 1);
+    float throwVelocity = 6f;
 
     void Start()
     {
@@ -50,6 +53,12 @@ public class PlayerMovement : MonoBehaviour
         PickUpBattery();
     }
 
+    void FixedUpdate()
+    {
+        if(facingRight) { transform.rotation = Quaternion.Euler(0f, 0f, 0); }
+        else { transform.rotation = Quaternion.Euler(0f, 180f, 0); }
+    }
+
     void Move()
     {
         if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)) {
@@ -59,14 +68,16 @@ public class PlayerMovement : MonoBehaviour
         {
             if(rb.velocity.x < 0) { acceleration = turnAroundSpeed; } 
             rb.AddForce(Vector2.right * acceleration);
-            transform.rotation = Quaternion.Euler(0f, 0f, 0);
+            facingRight = true;
+            //transform.rotation = Quaternion.Euler(0f, 0f, 0);
             return;
         }
         if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
         {
             if(rb.velocity.x > 0) { acceleration = turnAroundSpeed; }
             rb.AddForce(Vector2.left * acceleration);
-            transform.rotation = Quaternion.Euler(0f, 180f, 0);
+            facingRight = false;
+            //transform.rotation = Quaternion.Euler(0f, 180f, 0);
             return;
         }
 
@@ -158,10 +169,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         else if(holdingBattery && Input.GetKeyDown(KeyCode.E)) {
+            int direction = transform.rotation == Quaternion.Euler(0f, 0f, 0) ? 1 : -1;
             holdingBattery = false;
             battery.layer = LayerMask.NameToLayer("Battery");
             GetComponent<BoxCollider2D>().enabled = false;
-            battery.transform.position = batteryPlacer.transform.position;
+            battery.GetComponent<Rigidbody2D>().velocity = new Vector2(throwVector.normalized.x * throwVelocity * direction + rb.velocity.x, throwVector.normalized.y * throwVelocity + rb.velocity.y);
+            //battery.transform.position = batteryPlacer.transform.position;
         }
 
         if (holdingBattery)

@@ -9,32 +9,25 @@ public class PlayerMovement : MonoBehaviour
     float turnAroundSpeed = 8f;
     float acceleration;
     float friction = 40f;
-    float tolerence = 0.5f;
 
     bool grounded = true;
     bool onGround;
-    float jumpSpeed = 400f;
-    float groundDistance = 0.5f;
+    float jumpSpeed = 10f;
+    float groundDistance = 0.52f;
     int groundLayer;
     float coyoteTime;
     static float coyoteTimeConst = 0.1f;
     float jumpBuffer;
-    static float jumpBufferConst = 0.5f;
+    static float jumpBufferConst = 0.15f;
     bool spaceDown;
     bool jumping = false;
-
-    public GameObject anchor;
-    public GameObject endCable;
-    Vector2 anchorDir;
-    float boundDistance = 1f;
-    float boundingForce = 10f;
 
     Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        groundLayer = LayerMask.GetMask("Ground");
+        groundLayer = LayerMask.GetMask("Ground", "Battery");
         coyoteTime = coyoteTimeConst;
         jumpBuffer = jumpBufferConst;
         acceleration = runSpeed;
@@ -43,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        anchor.transform.position = transform.position;
         Move();
         Jump();
     }
@@ -107,8 +99,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        Debug.Log(spaceDown);
-
         if(Input.GetKeyDown(KeyCode.Space))
         {
             spaceDown = true;
@@ -130,11 +120,12 @@ public class PlayerMovement : MonoBehaviour
             jumpBuffer = 0f;
             jumping = true;
             spaceDown = false;
-            rb.AddForce(Vector2.up * jumpSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            //rb.AddForce(Vector2.up * jumpSpeed);
             rb.gravityScale = 1.5f;
         }
 
-        if (jumping && rb.velocity.y <= 0f || !Input.GetKey(KeyCode.Space))
+        if (jumping && (rb.velocity.y <= 0f || !Input.GetKey(KeyCode.Space)))
         {
             jumping = false;
             rb.gravityScale = 2.5f;

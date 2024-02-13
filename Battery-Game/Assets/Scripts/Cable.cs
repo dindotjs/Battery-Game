@@ -10,7 +10,7 @@ public class Cable : MonoBehaviour
     List<Vector2> points = new List<Vector2>();
     LineRenderer line;
     int hittable;
-    float outLength = 0.05f;
+    float outLength = 0.01f;
 
     void Start()
     {

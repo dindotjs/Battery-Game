@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //movement
     float runSpeed = 4f;
     float maxSpeed = 6f;
     float turnAroundSpeed = 8f;
@@ -12,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool grounded = true;
     bool onGround;
-    float jumpSpeed = 10f;
+    float jumpSpeed = 11f;
     float groundDistance = 0.52f;
     int groundLayer;
     float coyoteTime;
@@ -24,6 +25,13 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
 
+    //battery
+    GameObject battery;
+    public GameObject batteryHolder;
+    public GameObject batteryPlacer;
+    bool canPickUp;
+    bool holdingBattery = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         coyoteTime = coyoteTimeConst;
         jumpBuffer = jumpBufferConst;
         acceleration = runSpeed;
+        battery = GameObject.FindGameObjectWithTag("Battery");
     }
 
 
@@ -38,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         Jump();
+        PickUpBattery();
     }
 
     void Move()
@@ -49,12 +59,14 @@ public class PlayerMovement : MonoBehaviour
         {
             if(rb.velocity.x < 0) { acceleration = turnAroundSpeed; } 
             rb.AddForce(Vector2.right * acceleration);
+            transform.rotation = Quaternion.Euler(0f, 0f, 0);
             return;
         }
         if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
         {
             if(rb.velocity.x > 0) { acceleration = turnAroundSpeed; }
             rb.AddForce(Vector2.left * acceleration);
+            transform.rotation = Quaternion.Euler(0f, 180f, 0);
             return;
         }
 
@@ -78,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, groundLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.5f, Vector2.down, Mathf.Infinity, groundLayer);
         float distance = Mathf.Abs(hit.point.y - transform.position.y);
 
         if(distance < groundDistance) { onGround = true; }
@@ -122,18 +134,55 @@ public class PlayerMovement : MonoBehaviour
             spaceDown = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             //rb.AddForce(Vector2.up * jumpSpeed);
-            rb.gravityScale = 1.5f;
+            rb.gravityScale = 2f;
         }
 
-        if (jumping && (rb.velocity.y <= 0f || !Input.GetKey(KeyCode.Space)))
+        if (rb.velocity.y <= 0f || !Input.GetKey(KeyCode.Space))
         {
             jumping = false;
-            rb.gravityScale = 2.5f;
+            rb.gravityScale = 4f;
         }
 
         if(!jumping && grounded)
         {
             rb.gravityScale = 2f;
+        }
+    }
+    void PickUpBattery()
+    {
+        if(canPickUp && Input.GetKeyDown(KeyCode.E))
+        {
+            holdingBattery = true;
+            battery.layer = LayerMask.NameToLayer("HeldBattery");
+            GetComponent<BoxCollider2D>().enabled = true;
+        }
+
+        else if(holdingBattery && Input.GetKeyDown(KeyCode.E)) {
+            holdingBattery = false;
+            battery.layer = LayerMask.NameToLayer("Battery");
+            GetComponent<BoxCollider2D>().enabled = false;
+            battery.transform.position = batteryPlacer.transform.position;
+        }
+
+        if (holdingBattery)
+        { 
+            battery.transform.position = batteryHolder.transform.position; 
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Battery")
+        {
+            canPickUp = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Battery")
+        {
+            canPickUp = false;
         }
     }
 }

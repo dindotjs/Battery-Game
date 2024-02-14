@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Cable : MonoBehaviour
 {
@@ -8,14 +9,21 @@ public class Cable : MonoBehaviour
     public GameObject player;
     public GameObject battery;
     List<Vector2> points = new List<Vector2>();
+    List<float> lengths = new List<float>();
+    public float totalLength;
+    float baseLength;
     LineRenderer line;
     int hittable;
     float outLength = 0.01f;
+
+    float forceStrength = 3f;
+    float maxLength = 20f;
 
     void Start()
     {
         points.Add(battery.transform.position);
         points.Add(player.transform.position);
+        lengths.Add((points[1] - points[0]).magnitude);
         line = GetComponent<LineRenderer>();
         hittable = LayerMask.GetMask("Ground");
         line.positionCount = 2;
@@ -27,6 +35,9 @@ public class Cable : MonoBehaviour
         AddTension();
         if (points.Count > 2) { RemoveTension(); }
         UpdatePoints();
+        lengths[lengths.Count - 1] = (points[points.Count - 1] - points[points.Count - 2]).magnitude;
+        totalLength = baseLength + lengths[lengths.Count - 1];
+        PullPlayer();
     }
 
     void UpdatePoints()
@@ -53,6 +64,13 @@ public class Cable : MonoBehaviour
             points[points.Count - 1] = newPoint;
             points.Add(player.transform.position);
             line.positionCount++;
+            lengths.Add(0f);
+
+            baseLength = 0f;
+            for(int i = 0; i < lengths.Count-1; i++)
+            {
+                baseLength += lengths[i];
+            }
         }
     }
 
@@ -64,7 +82,6 @@ public class Cable : MonoBehaviour
 
         if(hit.collider == null)
         {
-            Debug.Log("Removing Point");
             direction = (points[points.Count - 2] - points[points.Count - 1]).normalized;
             distance = (points[points.Count - 2] - points[points.Count - 1]).magnitude;
             RaycastHit2D hit2 = Physics2D.Raycast(points[points.Count - 1], direction, distance, hittable);
@@ -73,6 +90,22 @@ public class Cable : MonoBehaviour
             points[points.Count - 2] = points[points.Count - 1];
             points.RemoveAt(points.Count-1);
             line.positionCount--;
+            lengths.RemoveAt(lengths.Count-1);
+
+            baseLength = 0f;
+            for (int i = 0; i < lengths.Count - 1; i++)
+            {
+                baseLength += lengths[i];
+            }
+        }
+    }
+    void PullPlayer()
+    {
+        if(totalLength > maxLength)
+        {
+            Vector2 direction = points[points.Count-2] - points[points.Count - 1];
+            float extension = totalLength - maxLength;
+            player.GetComponent<Rigidbody2D>().AddForce(direction.normalized * extension * forceStrength);
         }
     }
 }

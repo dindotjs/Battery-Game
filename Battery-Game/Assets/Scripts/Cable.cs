@@ -16,7 +16,7 @@ public class Cable : MonoBehaviour
     int hittable;
     float outLength = 0.01f;
 
-    float forceStrength = 5f;
+    float forceStrength = 2000f;
     float maxLength = 20f;
 
     void Start()
@@ -38,7 +38,6 @@ public class Cable : MonoBehaviour
         lengths[lengths.Count - 1] = (points[points.Count - 1] - points[points.Count - 2]).magnitude;
         totalLength = baseLength + lengths[lengths.Count - 1];
         PullPlayer();
-        Debug.Log(totalLength);
     }
 
     void UpdatePoints()
@@ -106,7 +105,7 @@ public class Cable : MonoBehaviour
         {
             Vector2 direction = points[points.Count-2] - points[points.Count - 1];
             float extension = totalLength - maxLength;
-            player.GetComponent<Rigidbody2D>().AddForce(direction.normalized * Mathf.Sqrt(extension) * forceStrength);
+            player.GetComponent<Rigidbody2D>().AddForce(direction.normalized * Mathf.Sqrt(extension) * forceStrength * Time.deltaTime);
         }
     }
 }

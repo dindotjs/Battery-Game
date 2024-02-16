@@ -7,6 +7,22 @@ public class MetalPad : MonoBehaviour
     public bool active = false;
 
 
+<<<<<<< Updated upstream
+=======
+    private void Update()
+    {
+        if(active)
+        {
+            wire.startColor = Color.yellow;
+            wire.endColor = Color.yellow;
+        }
+        else
+        {
+            wire.startColor = Color.black;
+            wire.endColor= Color.black;
+        }
+    }
+>>>>>>> Stashed changes
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Battery")

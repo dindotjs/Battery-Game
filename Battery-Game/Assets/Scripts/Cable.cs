@@ -34,7 +34,8 @@ public class Cable : MonoBehaviour
     void Update()
     {
         AddTension();
-        if (points.Count > 2) { RemoveTension(); }
+        if(points.Count > 2) { RemoveTension(); }
+        
         UpdatePoints();
         lengths[lengths.Count - 1] = (points[points.Count - 1] - points[points.Count - 2]).magnitude;
         if(lengths.Count > 2)

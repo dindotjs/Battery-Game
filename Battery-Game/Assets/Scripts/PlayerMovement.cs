@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //movement
-    float runSpeed = 1000f;
+
+    float acceleration;
+    float runSpeed = 1500f;
     float maxSpeed = 6f;
     float turnAroundSpeed = 2500f;
-    float acceleration;
     float friction = 60f;
     bool facingRight = true;
+    float resistance;
 
     bool grounded = true;
     bool onGround;
@@ -61,21 +63,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        if(holdingBattery) { resistance = 1.5f; }
+        else { resistance = 1f; }
+        acceleration = runSpeed;
+
         if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)) {
             return;
         }
-        if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed)
+        if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed / resistance)
         {
             if(rb.velocity.x < 0) { acceleration = turnAroundSpeed; } 
-            rb.AddForce(Vector2.right * acceleration * Time.deltaTime);
+            rb.AddForce(Vector2.right * (acceleration / resistance) * Time.deltaTime);
             facingRight = true;
             //transform.rotation = Quaternion.Euler(0f, 0f, 0);
             return;
         }
-        if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
+        if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed / resistance)
         {
             if(rb.velocity.x > 0) { acceleration = turnAroundSpeed; }
-            rb.AddForce(Vector2.left * acceleration * Time.deltaTime);
+            rb.AddForce(Vector2.left * (acceleration / resistance) * Time.deltaTime);
             facingRight = false;
             //transform.rotation = Quaternion.Euler(0f, 180f, 0);
             return;
@@ -97,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x + friction * Time.deltaTime, rb.velocity.y);
             return;
         }
-        acceleration = runSpeed;
     }
     void Jump()
     {
@@ -147,18 +152,18 @@ public class PlayerMovement : MonoBehaviour
             spaceDown = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             //rb.AddForce(Vector2.up * jumpSpeed);
-            rb.gravityScale = 2f;
+            rb.gravityScale = 2f * resistance;
         }
 
         if (rb.velocity.y <= 0f || !Input.GetKey(KeyCode.Space))
         {
             jumping = false;
-            rb.gravityScale = 4f;
+            rb.gravityScale = 4f * resistance;
         }
 
         if(!jumping && grounded)
         {
-            rb.gravityScale = 2f;
+            rb.gravityScale = 2f * resistance;
         }
     }
     void PickUpBattery()

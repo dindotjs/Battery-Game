@@ -541,8 +541,6 @@ Transform:
   m_Father: {fileID: 1460338372}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &344083295
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +865,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,8 +1900,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1815427926}
   battery: {fileID: 1964553126}
-<<<<<<< Updated upstream
-=======
   totalLength: 0
 --- !u!1 &1013820218
 GameObject:
@@ -2006,7 +2001,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
->>>>>>> Stashed changes
 --- !u!1 &1137412025
 GameObject:
   m_ObjectHideFlags: 3
@@ -3880,8 +3874,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!120 &1980369489
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -3996,4 +3988,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
->>>>>>> Stashed changes

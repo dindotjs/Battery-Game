@@ -5,10 +5,8 @@ using UnityEngine;
 public class MetalPad : MonoBehaviour
 {
     public bool active = false;
+    LineRenderer wire;
 
-
-<<<<<<< Updated upstream
-=======
     private void Update()
     {
         if(active)
@@ -22,7 +20,6 @@ public class MetalPad : MonoBehaviour
             wire.endColor= Color.black;
         }
     }
->>>>>>> Stashed changes
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Battery")

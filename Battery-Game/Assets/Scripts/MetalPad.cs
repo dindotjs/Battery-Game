@@ -7,6 +7,11 @@ public class MetalPad : MonoBehaviour
     public bool active = false;
     LineRenderer wire;
 
+    private void Start()
+    {
+        wire = GetComponent<LineRenderer>();
+    }
+
     private void Update()
     {
         if(active)

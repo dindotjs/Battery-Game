@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //movement
-    float runSpeed = 4f;
+    float runSpeed = 1000f;
     float maxSpeed = 6f;
-    float turnAroundSpeed = 8f;
+    float turnAroundSpeed = 2500f;
     float acceleration;
-    float friction = 40f;
+    float friction = 60f;
     bool facingRight = true;
 
     bool grounded = true;
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed)
         {
             if(rb.velocity.x < 0) { acceleration = turnAroundSpeed; } 
-            rb.AddForce(Vector2.right * acceleration);
+            rb.AddForce(Vector2.right * acceleration * Time.deltaTime);
             facingRight = true;
             //transform.rotation = Quaternion.Euler(0f, 0f, 0);
             return;
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
         {
             if(rb.velocity.x > 0) { acceleration = turnAroundSpeed; }
-            rb.AddForce(Vector2.left * acceleration);
+            rb.AddForce(Vector2.left * acceleration * Time.deltaTime);
             facingRight = false;
             //transform.rotation = Quaternion.Euler(0f, 180f, 0);
             return;

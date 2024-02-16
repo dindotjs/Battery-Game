@@ -10,11 +10,8 @@ public class Fan : MonoBehaviour
     public int inFan = 0;
     GameObject player;
     public MetalPad input;
-<<<<<<< HEAD
-=======
     public Gate gateInput;
     public SpriteRenderer effect;
->>>>>>> main
     bool on;
 
     private void Start()
@@ -24,13 +21,9 @@ public class Fan : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< HEAD
-        on = input.active;
-=======
         if (input != null) { on = input.active; }
         else { on = gateInput.active; }
         effect.enabled = on;
->>>>>>> main
 
         if(inFan > 0 && player.GetComponent<Rigidbody2D>().velocity.y < maxSpeed)
         {

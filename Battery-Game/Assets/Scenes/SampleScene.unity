@@ -541,8 +541,6 @@ Transform:
   m_Father: {fileID: 1460338372}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-=======
 --- !u!1 &344083295
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +736,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
->>>>>>> main
 --- !u!1 &442127317
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,13 +768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inFan: 0
-<<<<<<< HEAD
-  input: {fileID: 1980369490}
-=======
   input: {fileID: 0}
   gateInput: {fileID: 1013820219}
   effect: {fileID: 441125702}
->>>>>>> main
 --- !u!61 &442127319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -791,11 +784,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-<<<<<<< HEAD
-  m_Offset: {x: 0, y: 6.4353137}
-=======
   m_Offset: {x: 0, y: 7.034888}
->>>>>>> main
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -806,11 +795,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Size: {x: 1, y: 13.870627}
-=======
   m_Size: {x: 1, y: 15.069776}
->>>>>>> main
   m_EdgeRadius: 0
 --- !u!212 &442127320
 SpriteRenderer:
@@ -875,12 +860,8 @@ Transform:
   m_LocalPosition: {x: 2.293, y: 0.025, z: 0}
   m_LocalScale: {x: 1, y: 0.23726001, z: 1}
   m_ConstrainProportionsScale: 0
-<<<<<<< HEAD
-  m_Children: []
-=======
   m_Children:
   - {fileID: 441125701}
->>>>>>> main
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1920,8 +1901,6 @@ MonoBehaviour:
   player: {fileID: 1815427926}
   battery: {fileID: 1964553126}
   totalLength: 0
-<<<<<<< HEAD
-=======
 --- !u!1 &1013820218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,7 +2001,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
->>>>>>> main
 --- !u!1 &1137412025
 GameObject:
   m_ObjectHideFlags: 3
@@ -3941,15 +3919,9 @@ LineRenderer:
   m_SortingOrder: 1
   m_Positions:
   - {x: 0.88, y: 0, z: 0}
-<<<<<<< HEAD
-  - {x: 0.88, y: -0.66, z: 1}
-  - {x: 2.27, y: -0.66, z: 1}
-  - {x: 2.27, y: 0.01, z: 1}
-=======
   - {x: 0.88, y: -0.66, z: 0}
   - {x: 2.27, y: -0.66, z: 0}
   - {x: 2.27, y: 0.01, z: 0}
->>>>>>> main
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -3970,13 +3942,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-<<<<<<< HEAD
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-=======
       key0: {r: 0, g: 0, b: 0, a: 1}
       key1: {r: 0, g: 0, b: 0, a: 1}
->>>>>>> main
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4022,8 +3989,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0323c7d6a4d564a894ac162300a96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   active: 0
-=======
-  active: 0
->>>>>>> main

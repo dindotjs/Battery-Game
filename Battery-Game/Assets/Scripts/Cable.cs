@@ -17,11 +17,7 @@ public class Cable : MonoBehaviour
     int hittable;
     float outLength = 0.01f;
 
-<<<<<<< HEAD
-    float forceStrength = 2000f;
-=======
     float forceStrength = 3000f;
->>>>>>> main
     float maxLength = 20f;
 
     void Start()

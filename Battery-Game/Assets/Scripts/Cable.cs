@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Cable : MonoBehaviour
 {
@@ -16,7 +17,11 @@ public class Cable : MonoBehaviour
     int hittable;
     float outLength = 0.01f;
 
+<<<<<<< HEAD
     float forceStrength = 2000f;
+=======
+    float forceStrength = 3000f;
+>>>>>>> main
     float maxLength = 20f;
 
     void Start()
@@ -36,6 +41,10 @@ public class Cable : MonoBehaviour
         if (points.Count > 2) { RemoveTension(); }
         UpdatePoints();
         lengths[lengths.Count - 1] = (points[points.Count - 1] - points[points.Count - 2]).magnitude;
+        if(lengths.Count > 2)
+        {
+            lengths[lengths.Count-2] = (points[points.Count-2] - points[points.Count-3]).magnitude;
+        }
         totalLength = baseLength + lengths[lengths.Count - 1];
         PullPlayer();
     }
@@ -66,11 +75,11 @@ public class Cable : MonoBehaviour
             line.positionCount++;
             lengths.Add(0f);
 
-            baseLength = 0f;
+            /*baseLength = 0f;
             for(int i = 0; i < lengths.Count-1; i++)
             {
                 baseLength += lengths[i];
-            }
+            }*/
         }
     }
 
@@ -92,15 +101,21 @@ public class Cable : MonoBehaviour
             line.positionCount--;
             lengths.RemoveAt(lengths.Count-1);
 
-            baseLength = 0f;
+            /*baseLength = 0f;
             for (int i = 0; i < lengths.Count - 1; i++)
             {
                 baseLength += lengths[i];
-            }
+            }*/
         }
     }
     void PullPlayer()
     {
+        totalLength = 0f;
+        for(int i = 0; i < lengths.Count; i++)
+        {
+            totalLength += lengths[i];
+        }
+        Debug.Log(totalLength);
         if(totalLength > maxLength)
         {
             Vector2 direction = points[points.Count-2] - points[points.Count - 1];

@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     bool grounded = true;
     bool onGround;
     float jumpSpeed = 11f;
-    float groundDistance = 0.52f;
+    float groundDistance = 0.55f;
     int groundLayer;
     float coyoteTime;
     static float coyoteTimeConst = 0.1f;
@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject batteryPlacer;
     bool canPickUp;
     bool holdingBattery = false;
-    Vector2 throwVector = new Vector2(3, 1);
-    float throwVelocity = 6f;
+    Vector2 throwVector = new Vector2(3, 2);
+    float throwVelocity = 8f;
 
     void Start()
     {
@@ -103,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.5f, Vector2.down, Mathf.Infinity, groundLayer);
         float distance = Mathf.Abs(hit.point.y - transform.position.y);
+
+        Debug.Log(distance);
 
         if(distance < groundDistance) { onGround = true; }
         else { onGround = false; }

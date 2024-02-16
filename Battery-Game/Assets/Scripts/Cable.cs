@@ -111,7 +111,6 @@ public class Cable : MonoBehaviour
         {
             totalLength += lengths[i];
         }
-        Debug.Log(totalLength);
         if(totalLength > maxLength)
         {
             Vector2 direction = points[points.Count-2] - points[points.Count - 1];

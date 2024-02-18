@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 344083297}
   - component: {fileID: 344083296}
   - component: {fileID: 344083298}
+  - component: {fileID: 344083299}
   m_Layer: 6
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -619,7 +620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344083295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.47, y: 1.02, z: 0}
+  m_LocalPosition: {x: 5.35, y: 1.02, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -652,6 +653,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &344083299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344083295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039d60a7b3c018a47829d92b5ee2394d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difference: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
+  endPos: {x: 5.35, y: 10}
+  input: {fileID: 1980369490}
+  gateInput: {fileID: 0}
 --- !u!1 &441125700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,7 +1734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855738289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: 2.51, z: 0}
+  m_LocalPosition: {x: -1.41, y: 2.51, z: 0}
   m_LocalScale: {x: 0.9738146, y: 0.8283821, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1900,6 +1918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1815427926}
   battery: {fileID: 1964553126}
+  attachedObject: []
   totalLength: 0
 --- !u!1 &1013820218
 GameObject:

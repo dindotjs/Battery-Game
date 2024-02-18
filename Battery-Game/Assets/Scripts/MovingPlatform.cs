@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class MovingPlatform : MonoBehaviour
+{
+    public Vector2 difference;
+    public Vector2 startPos;
+    public Vector2 endPos;
+    public MetalPad input;
+    public Gate gateInput;
+    bool on;
+    float moveSpeed = 1f;
+    Vector2 lastPos;
+    private void Start()
+    {
+        startPos = transform.position;
+    }
+    void Update()
+    {
+        if (input != null) { on = input.active; }
+        else { on = gateInput.active; }
+        
+        if(on)
+        {
+            transform.position = Vector2.Lerp(transform.position, endPos, Time.deltaTime * moveSpeed);
+            difference = (Vector2)transform.position - lastPos;
+        }
+        else
+        {
+            transform.position = Vector2.Lerp(transform.position, startPos, Time.deltaTime * moveSpeed);
+            difference = (Vector2)transform.position - lastPos;
+        }
+        lastPos = transform.position;
+    }
+}

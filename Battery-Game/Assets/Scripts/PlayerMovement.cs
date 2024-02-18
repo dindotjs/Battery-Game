@@ -109,8 +109,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.5f, Vector2.down, Mathf.Infinity, groundLayer);
         float distance = Mathf.Abs(hit.point.y - transform.position.y);
 
-        Debug.Log(distance);
-
         if(distance < groundDistance) { onGround = true; }
         else { onGround = false; }
 

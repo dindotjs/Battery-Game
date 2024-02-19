@@ -25,6 +25,10 @@ public class MovingPlatform : MonoBehaviour
         if(on)
         {
             transform.position = Vector2.Lerp(transform.position, endPos, Time.deltaTime * moveSpeed);
+            if(Mathf.Round(transform.position.x * 100) == Mathf.Round(endPos.x * 100) && Mathf.Round(transform.position.y * 100) == Mathf.Round(endPos.y * 100))
+            {
+                transform.position = endPos;
+            }
             difference = (Vector2)transform.position - lastPos;
         }
         else

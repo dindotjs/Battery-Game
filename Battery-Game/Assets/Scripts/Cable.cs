@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.ComponentModel.Design;
 
 public class Cable : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class Cable : MonoBehaviour
     public float totalLength;
     LineRenderer line;
     int hittable;
-    float outLength = 0.01f;
-    float midPointFactor = 11 / 12;
+    float outLength = 0.1f;
+    public float midPointFactor = 0.8f;
+    public float numChecks = 20f;
+    float tolerence = 1f;
 
     float forceStrength = 3000f;
     float maxLength = 20f;
@@ -49,7 +52,6 @@ public class Cable : MonoBehaviour
         }
         CheckMoving();
         PullPlayer();
-        Debug.Log(totalLength);
     }
 
     void UpdatePoints()
@@ -65,7 +67,8 @@ public class Cable : MonoBehaviour
     {
         for(int i = 0; i < midPoints.Count; i++)
         {
-            midPoints[i] = (points[i + 1] + points[i]) * midPointFactor;
+            Vector2 diff = points[i + 1] - points[i];
+            midPoints[i] = points[i] + diff * midPointFactor;
         }
     }
     void AddTension()
@@ -99,14 +102,25 @@ public class Cable : MonoBehaviour
         Vector2 direction = (points[points.Count - 3] - points[points.Count - 1]).normalized;
         float distance = (points[points.Count - 3] - points[points.Count - 1]).magnitude;
         RaycastHit2D hit = Physics2D.Raycast(points[points.Count - 1], direction, distance, hittable);
-
         if(hit.collider == null)
         {
-            direction = (midPoints[midPoints.Count-2] - points[points.Count - 1]).normalized;
-            distance = (midPoints[midPoints.Count -2] - points[points.Count - 1]).magnitude;
-            RaycastHit2D hit2 = Physics2D.Raycast(points[points.Count - 1], direction, distance, hittable);
-            Debug.DrawLine(points[points.Count - 1], midPoints[midPoints.Count - 1]);
-            if(hit2.collider != null) { return; }
+            for(int i = 1; i < numChecks; i++)
+            {
+                Vector2 diff = points[points.Count-3] - points[points.Count-2];
+                float fraction = i * 1/numChecks;
+                //Debug.Log(fraction);
+                Vector2 midPoint = points[points.Count-2] + (fraction * diff);
+                Vector2 direction2 = (midPoint - points[points.Count - 1]).normalized;
+                float distance2 = (midPoint - points[points.Count - 1]).magnitude;
+                RaycastHit2D hit2 = Physics2D.Raycast(points[points.Count - 1], direction2, distance2, hittable);
+                bool close = (hit2.point.x + tolerence < midPoint.x || hit2.point.x - tolerence > midPoint.x) && (hit2.point.y + tolerence < midPoint.y || hit2.point.y - tolerence > midPoint.y);
+                Debug.Log(fraction);
+                Debug.Log(fraction * diff);
+                Debug.Log(midPoint);
+                Debug.DrawRay(points[points.Count - 1], direction2 * distance2, Color.red, 10f); //not raycasting to right point :(
+                if (hit2.collider != null) { if (!close) { Debug.Log("Returned");  return; } }
+            } 
+            
 
             points[points.Count - 2] = points[points.Count - 1];
             attachedObject[attachedObject.Count - 2] = attachedObject[attachedObject.Count - 1];

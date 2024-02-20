@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public MetalPad input;
+    ElectricInput input;
+
+    private void Start()
+    {
+        input = GetComponent<ElectricInput>();
+    }
 
     void Update()
     {
-        if(input.active)
+        if(input.on)
         {
             GetComponent<SpriteRenderer>().color = Color.grey;
             GetComponent<BoxCollider2D>().enabled = false;

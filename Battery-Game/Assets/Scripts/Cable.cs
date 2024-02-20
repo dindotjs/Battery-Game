@@ -52,6 +52,7 @@ public class Cable : MonoBehaviour
             lengths[lengths.Count-2] = (points[points.Count-2] - points[points.Count-3]).magnitude;
         }
         CheckMoving();
+        CheckCurrent();
         PullPlayer();
     }
 
@@ -124,6 +125,10 @@ public class Cable : MonoBehaviour
             
 
             points[points.Count - 2] = points[points.Count - 1];
+            if (attachedObject[attachedObject.Count - 2].GetComponent<MetalBox>() != null) 
+            {
+                attachedObject[attachedObject.Count - 2].GetComponent<MetalBox>().active = false;
+            }
             attachedObject[attachedObject.Count - 2] = attachedObject[attachedObject.Count - 1];
             points.RemoveAt(points.Count-1);
             attachedObject.RemoveAt(attachedObject.Count-1);
@@ -161,6 +166,16 @@ public class Cable : MonoBehaviour
                 points[i] += attachedObject[i].GetComponent<MovingPlatform>().difference;
                 lengths[i - 1] = (points[i] - points[i - 1]).magnitude;
                 lengths[i] = (points[i + 1] - points[i]).magnitude;
+            }
+        }
+    }
+    void CheckCurrent()
+    {
+        for(int i = 0; i < attachedObject.Count - 1; i++)
+        {
+            if (attachedObject[i].GetComponent<MetalBox>()  != null)
+            {
+                attachedObject[i].GetComponent<MetalBox>().active = true; 
             }
         }
     }

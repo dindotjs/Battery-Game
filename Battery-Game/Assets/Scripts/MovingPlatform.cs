@@ -8,19 +8,18 @@ public class MovingPlatform : MonoBehaviour
     public Vector2 difference;
     public Vector2 startPos;
     public Vector2 endPos;
-    public MetalPad input;
-    public Gate gateInput;
+    ElectricInput input;
     bool on;
     float moveSpeed = 1f;
     Vector2 lastPos;
     private void Start()
     {
         startPos = transform.position;
+        input = GetComponent<ElectricInput>();
     }
     void Update()
     {
-        if (input != null) { on = input.active; }
-        else { on = gateInput.active; }
+        on = input.on; 
         
         if(on)
         {

@@ -5,11 +5,21 @@ using UnityEngine;
 public class MetalBox : MonoBehaviour
 {
     public bool active;
+    bool batteryOn;
+
+    private void Update()
+    {
+        if(batteryOn)
+        {
+            active = true;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Battery")
         {
+            batteryOn = true;
             active = true;
         }
     }
@@ -18,6 +28,7 @@ public class MetalBox : MonoBehaviour
     {
         if (collision.gameObject.tag == "Battery")
         {
+            batteryOn = false;
             active = false;
         }
     }

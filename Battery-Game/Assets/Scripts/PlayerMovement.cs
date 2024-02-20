@@ -32,10 +32,11 @@ public class PlayerMovement : MonoBehaviour
     GameObject battery;
     public GameObject batteryHolder;
     public GameObject batteryPlacer;
-    bool canPickUp;
-    bool holdingBattery = false;
+    public bool canPickUp;
+    public bool holdingBattery = false;
     Vector2 throwVector = new Vector2(3, 2);
     float throwVelocity = 8f;
+    float batteryPushback = 500f;
 
     void Start()
     {
@@ -166,20 +167,24 @@ public class PlayerMovement : MonoBehaviour
     }
     void PickUpBattery()
     {
-        if(canPickUp && Input.GetKeyDown(KeyCode.E))
-        {
-            holdingBattery = true;
-            battery.layer = LayerMask.NameToLayer("HeldBattery");
-            GetComponent<BoxCollider2D>().enabled = true;
-        }
 
-        else if(holdingBattery && Input.GetKeyDown(KeyCode.E)) {
+        if (holdingBattery && Input.GetKeyDown(KeyCode.E))
+        {
             int direction = transform.rotation == Quaternion.Euler(0f, 0f, 0) ? 1 : -1;
             holdingBattery = false;
             battery.layer = LayerMask.NameToLayer("Battery");
             GetComponent<BoxCollider2D>().enabled = false;
             battery.GetComponent<Rigidbody2D>().velocity = new Vector2(throwVector.normalized.x * throwVelocity * direction + rb.velocity.x, throwVector.normalized.y * throwVelocity + rb.velocity.y);
             //battery.transform.position = batteryPlacer.transform.position;
+            rb.AddForce(new Vector2(-throwVector.normalized.x * direction * batteryPushback, -throwVector.normalized.y * batteryPushback));
+        }
+
+        else if (canPickUp && Input.GetKeyDown(KeyCode.E))
+        {
+            holdingBattery = true;
+            canPickUp = false;
+            battery.layer = LayerMask.NameToLayer("HeldBattery");
+            GetComponent<BoxCollider2D>().enabled = true;
         }
 
         if (holdingBattery)
@@ -190,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Battery")
+        if (collision.gameObject.tag == "Battery")
         {
             canPickUp = true;
         }

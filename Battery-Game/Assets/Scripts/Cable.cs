@@ -10,7 +10,6 @@ public class Cable : MonoBehaviour
     public GameObject player;
     public GameObject battery;
     public List<Vector2> points = new List<Vector2>();
-    public List<Vector2> midPoints = new List<Vector2>();
     List<float> lengths = new List<float>();
     public List<GameObject> attachedObject = new List<GameObject>();
     public float totalLength;
@@ -19,8 +18,8 @@ public class Cable : MonoBehaviour
     float outLength = 0.075f;
     float pointTolerence = 0.1f;
     public float midPointFactor = 0.8f;
-    float numChecks = 5f;
-    float tolerence = 25f;
+    float numChecks = 10f;
+    float tolerence = 15f;
 
     float forceStrength = 3000f;
     float maxLength = 20f;
@@ -31,7 +30,6 @@ public class Cable : MonoBehaviour
         points.Add(player.transform.position);
         attachedObject.Add(battery);
         attachedObject.Add(player);
-        midPoints.Add((points[1] + points[0]) * midPointFactor);
         lengths.Add((points[1] - points[0]).magnitude);
         line = GetComponent<LineRenderer>();
         hittable = LayerMask.GetMask("Ground");
@@ -41,11 +39,16 @@ public class Cable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player.GetComponent<PlayerMovement>().holdingBattery)
+        {
+            ResetPoints();
+        }
+
+
         AddTension();
         if(points.Count > 2) { RemoveTension(); }
         
         UpdatePoints();
-        UpdateMidpoints();
         lengths[lengths.Count - 1] = (points[points.Count - 1] - points[points.Count - 2]).magnitude;
         if(lengths.Count > 2)
         {
@@ -65,14 +68,6 @@ public class Cable : MonoBehaviour
             line.SetPosition(i, points[i]);
         }
     }
-    void UpdateMidpoints()
-    {
-        for(int i = 0; i < midPoints.Count; i++)
-        {
-            Vector2 diff = points[i + 1] - points[i];
-            midPoints[i] = points[i] + diff * midPointFactor;
-        }
-    }
     void AddTension()
     {
         //todo - add/remove tension from battery to closest point
@@ -90,13 +85,27 @@ public class Cable : MonoBehaviour
             attachedObject.Add(player);
             line.positionCount++;
             lengths.Add(0f);
-            midPoints.Add(newPoint);
-
+            return;
             /*baseLength = 0f;
             for(int i = 0; i < lengths.Count-1; i++)
             {
                 baseLength += lengths[i];
             }*/
+        }
+
+        //check from battery
+        
+        direction = (points[1] - points[0]).normalized;
+        distance = (points[1] - points[0]).magnitude;
+        hit = Physics2D.Raycast(points[0], direction, distance, hittable);
+        if (hit.collider != null)
+        {
+            if (Mathf.Round(hit.point.x * 100) == Mathf.Round(points[1].x * 100) && Mathf.Round(hit.point.y * 100) == Mathf.Round(points[1].y * 100)) { return; }
+            Vector2 newPoint = hit.point + hit.normal * outLength;
+            points.Insert(1, newPoint);
+            attachedObject.Insert(1, hit.collider.gameObject);
+            line.positionCount++;
+            lengths.Insert(1, 0f);
         }
     }
     void RemoveTension()
@@ -134,13 +143,6 @@ public class Cable : MonoBehaviour
             attachedObject.RemoveAt(attachedObject.Count-1);
             line.positionCount--;
             lengths.RemoveAt(lengths.Count-1);
-            midPoints.RemoveAt(midPoints.Count - 1);
-
-            /*baseLength = 0f;
-            for (int i = 0; i < lengths.Count - 1; i++)
-            {
-                baseLength += lengths[i];
-            }*/
         }
     }
     void PullPlayer()
@@ -178,5 +180,18 @@ public class Cable : MonoBehaviour
                 attachedObject[i].GetComponent<MetalBox>().active = true; 
             }
         }
+    }
+
+    private void ResetPoints()
+    {
+        points.Clear();
+        attachedObject.Clear();
+        lengths.Clear();
+        points.Add(battery.transform.position);
+        points.Add(player.transform.position);
+        attachedObject.Add(battery);
+        attachedObject.Add(player);
+        lengths.Add((points[1] - points[0]).magnitude);
+        line.positionCount = 2;
     }
 }

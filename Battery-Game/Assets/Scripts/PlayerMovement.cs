@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        groundLayer = LayerMask.GetMask("Ground", "Battery");
+        groundLayer = LayerMask.GetMask("Ground");
         coyoteTime = coyoteTimeConst;
         jumpBuffer = jumpBufferConst;
         acceleration = runSpeed;

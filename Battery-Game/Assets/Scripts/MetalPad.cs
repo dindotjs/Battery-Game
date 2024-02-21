@@ -30,6 +30,8 @@ public class MetalPad : MonoBehaviour
         if (collision.gameObject.tag == "Battery")
         {
             active = true;
+            collision.gameObject.transform.position = transform.position;
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 

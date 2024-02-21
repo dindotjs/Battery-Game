@@ -129,7 +129,7 @@ public class Cable : MonoBehaviour
                 bool close = Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence) && Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence);
                 //bool close = (hit2.point.x + tolerence < midPoint.x || hit2.point.x - tolerence > midPoint.x) && (hit2.point.y + tolerence < midPoint.y || hit2.point.y - tolerence > midPoint.y);
                 Debug.DrawRay(points[points.Count - 1], direction2 * distance2, Color.red, 2f); //not raycasting to right point :(
-                if (hit2.collider != null) { if (!close) { Debug.Log("Returned");  return; } }
+                if (hit2.collider != null) { if (!close) { return; } }
             } 
             
 

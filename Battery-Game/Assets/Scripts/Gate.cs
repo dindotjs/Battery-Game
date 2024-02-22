@@ -9,8 +9,10 @@ public class Gate : MonoBehaviour
     public bool active;
     public MetalPad padInput;
     public MetalBox boxInput;
+    public Gate gateInput;
     public MetalPad padInput2;
     public MetalBox boxInput2;
+    public Gate gateInput2;
     // 0 = not | 1 = delay | 2 = and 
     public int type;
     public float delayTime = 1f;
@@ -26,6 +28,10 @@ public class Gate : MonoBehaviour
         {
             on = boxInput.active;
         }
+        else if(gateInput != null)
+        {
+            on = gateInput.active;
+        }
 
         if(padInput2 != null)
         {
@@ -34,6 +40,10 @@ public class Gate : MonoBehaviour
         else if(boxInput2 != null)
         {
             on2 = boxInput2.active;
+        }
+        else if(gateInput2 != null)
+        {
+            on2 = gateInput2.active;
         }
 
 

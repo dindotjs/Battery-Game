@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     float throwVelocity = 8f;
     float batteryPushback = 500f;
 
+    public SpriteRenderer hands;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -189,7 +191,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (holdingBattery)
         { 
-            battery.transform.position = batteryHolder.transform.position; 
+            battery.transform.position = batteryHolder.transform.position;
+            hands.enabled = true;
+        }
+        else
+        {
+            hands.enabled = false;
         }
     }
 

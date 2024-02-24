@@ -17,7 +17,6 @@ public class Cable : MonoBehaviour
     LineRenderer line;
     int hittable;
     float outLength = 0.075f;
-    float pointTolerence = 0.1f;
     public float midPointFactor = 0.8f;
     float numChecks = 10f;
     float tolerence = 15f;

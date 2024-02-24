@@ -18,9 +18,28 @@ public class Gate : MonoBehaviour
     public float delayTime = 1f;
     bool delayGateCounting = false;
 
+    LineRenderer wire;
+    public GameObject attachedObject;
+
+    private void Start()
+    {
+        wire = GetComponent<LineRenderer>();
+    }
+
     void Update()
     {
-        if(padInput != null)
+        if (active)
+        {
+            wire.startColor = Color.yellow;
+            wire.endColor = Color.yellow;
+        }
+        else
+        {
+            wire.startColor = Color.black;
+            wire.endColor = Color.black;
+        }
+
+        if (padInput != null)
         {
             on = padInput.active;
         }
@@ -44,6 +63,11 @@ public class Gate : MonoBehaviour
         else if(gateInput2 != null)
         {
             on2 = gateInput2.active;
+        }
+
+        if(attachedObject != null)
+        {
+            wire.SetPosition(wire.positionCount - 1, attachedObject.transform.position);
         }
 
 

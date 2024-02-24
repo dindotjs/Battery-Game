@@ -6,6 +6,7 @@ public class MetalPad : MonoBehaviour
 {
     public bool active = false;
     LineRenderer wire;
+    public GameObject attachedObject;
 
     private void Start()
     {
@@ -23,6 +24,11 @@ public class MetalPad : MonoBehaviour
         {
             wire.startColor = Color.black;
             wire.endColor= Color.black;
+        }
+
+        if (attachedObject != null)
+        {
+            wire.SetPosition(wire.positionCount - 1, attachedObject.transform.position);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

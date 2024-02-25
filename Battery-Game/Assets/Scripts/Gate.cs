@@ -20,18 +20,24 @@ public class Gate : MonoBehaviour
 
     LineRenderer wire;
     public GameObject attachedObject;
+    Color32 wireColorOn = new Color32(0xF9, 0xC2, 0x2B, 0xFF);
+
+    public List<Sprite> sprites = new List<Sprite>();
+    SpriteRenderer sr;
+    int charge = 0;
 
     private void Start()
     {
         wire = GetComponent<LineRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         if (active)
         {
-            wire.startColor = Color.yellow;
-            wire.endColor = Color.yellow;
+            wire.startColor = wireColorOn;
+            wire.endColor = wireColorOn;
         }
         else
         {
@@ -73,18 +79,28 @@ public class Gate : MonoBehaviour
 
         if (type == 0) 
         {
-            active = !on; 
+            active = !on;
+            sr.sprite = sprites[active ? 0 : 1];
         }
         else if(type == 1)
         {
-            if(on && !active && !delayGateCounting)
+            if(on && charge != 5 && !delayGateCounting)
             {
-                StartCoroutine(DelayGate());
+                StartCoroutine(ChargeCooldown());
             }
-            else if(!on && active && !delayGateCounting)
+            else if(!on && charge != 0 && !delayGateCounting)
             {
-                StartCoroutine(DelayGate());
+                StartCoroutine(ChargeCooldown());
             }
+            if(charge == 5)
+            {
+                active = true;
+            }
+            else if(charge == 0)
+            {
+                active = false;
+            }
+            sr.sprite = sprites[charge];
         }
         else if(type == 2)
         {
@@ -96,14 +112,16 @@ public class Gate : MonoBehaviour
             {
                 active = false;
             }
+            sr.sprite = sprites[active ? 1 : 0];
         }
     }
 
-    IEnumerator DelayGate()
+    IEnumerator ChargeCooldown()
     {
         delayGateCounting = true;
-        yield return new WaitForSeconds(delayTime);
-        active = on;
+        yield return new WaitForSeconds(delayTime/5);
+        charge += on ? 1 : -1;
+        charge = (int)Mathf.Clamp(charge, 0f, 5f);
         delayGateCounting = false;
     }
 }

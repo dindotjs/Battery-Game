@@ -7,6 +7,7 @@ public class MetalPad : MonoBehaviour
     public bool active = false;
     LineRenderer wire;
     public GameObject attachedObject;
+    Color32 wireColorOn = new Color32(0xF9, 0xC2, 0x2B, 0xFF);
 
     private void Start()
     {
@@ -17,8 +18,8 @@ public class MetalPad : MonoBehaviour
     {
         if(active)
         {
-            wire.startColor = Color.yellow;
-            wire.endColor = Color.yellow;
+            wire.startColor = wireColorOn;
+            wire.endColor = wireColorOn;
         }
         else
         {

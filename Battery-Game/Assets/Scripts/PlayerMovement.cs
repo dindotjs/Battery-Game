@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     //movement
 
     float acceleration;
-    float runSpeed = 1500f;
+    float runSpeed = 25f;
     float maxSpeed = 6f;
-    float turnAroundSpeed = 2500f;
+    float turnAroundSpeed = 50f;
     float friction = 60f;
     bool facingRight = true;
     float resistance;
@@ -75,8 +75,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed / resistance)
         {
-            if(rb.velocity.x < 0) { acceleration = turnAroundSpeed; } 
-            rb.AddForce(Vector2.right * (acceleration / resistance) * Time.deltaTime);
+            if(rb.velocity.x < 0) { acceleration = turnAroundSpeed; }
+            rb.velocity = new Vector2(rb.velocity.x + ((acceleration / resistance) * Time.deltaTime), rb.velocity.y);
+            //rb.AddForce(Vector2.right * (acceleration / resistance) * Time.deltaTime);
             facingRight = true;
             //transform.rotation = Quaternion.Euler(0f, 0f, 0);
             return;
@@ -84,7 +85,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed / resistance)
         {
             if(rb.velocity.x > 0) { acceleration = turnAroundSpeed; }
-            rb.AddForce(Vector2.left * (acceleration / resistance) * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x - ((acceleration / resistance) * Time.deltaTime), rb.velocity.y);
+            //rb.AddForce(Vector2.left * (acceleration / resistance) * Time.deltaTime);
             facingRight = false;
             //transform.rotation = Quaternion.Euler(0f, 180f, 0);
             return;

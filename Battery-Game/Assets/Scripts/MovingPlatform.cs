@@ -12,6 +12,13 @@ public class MovingPlatform : MonoBehaviour
     bool on;
     float moveSpeed = 1f;
     Vector2 lastPos;
+    bool playerOn;
+    bool batteryOn;
+    GameObject player;
+    GameObject battery;
+    Vector2 playerVelocity;
+    Vector2 velocity;
+
     private void Start()
     {
         startPos = transform.position;
@@ -35,6 +42,46 @@ public class MovingPlatform : MonoBehaviour
             transform.position = Vector2.Lerp(transform.position, startPos, Time.deltaTime * moveSpeed);
             difference = (Vector2)transform.position - lastPos;
         }
+
         lastPos = transform.position;
+
+
+        if(playerOn && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        {
+            player.transform.position += (Vector3)difference;
+
+        }
+
+        if (batteryOn)
+        {
+            battery.transform.position += (Vector3)difference;
+
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            playerOn = true;
+            player = collision.gameObject;
+        }
+        else if(collision.gameObject.tag == "Battery")
+        {
+            batteryOn = true;
+            battery = collision.gameObject;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerOn = false;
+        }
+        else if (collision.gameObject.tag == "Battery")
+        {
+            batteryOn = false;
+        }
     }
 }

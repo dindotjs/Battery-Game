@@ -217,7 +217,7 @@ public class Cable : MonoBehaviour
     private void AnimateBar()
     {
         int index = (int)Mathf.Clamp((float)((int)Mathf.Round((totalLength / maxLength) * 9f)), 0f, 9f);
-        Debug.Log(index);
         bar.sprite = barSprites[index];
+        bar.enabled = !player.GetComponent<PlayerMovement>().holdingBattery;
     }
 }

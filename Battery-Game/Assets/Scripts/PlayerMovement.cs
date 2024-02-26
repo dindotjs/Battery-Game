@@ -171,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PickUpBattery()
     {
+        battery.GetComponent<BoxCollider2D>().enabled = !holdingBattery;
 
         if (holdingBattery && Input.GetKeyDown(KeyCode.E))
         {
@@ -179,11 +180,10 @@ public class PlayerMovement : MonoBehaviour
             battery.layer = LayerMask.NameToLayer("Battery");
             GetComponent<BoxCollider2D>().enabled = false;
             battery.GetComponent<Rigidbody2D>().velocity = new Vector2(throwVector.normalized.x * throwVelocity * direction + rb.velocity.x, throwVector.normalized.y * throwVelocity + rb.velocity.y);
-            //battery.transform.position = batteryPlacer.transform.position;
             rb.AddForce(new Vector2(-throwVector.normalized.x * direction * batteryPushback, -throwVector.normalized.y * batteryPushback));
         }
 
-        else if (canPickUp && Input.GetKeyDown(KeyCode.E))
+        else if (canPickUp && !holdingBattery && Input.GetKeyDown(KeyCode.E))
         {
             holdingBattery = true;
             canPickUp = false;
@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Battery")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Battery"))
         {
             canPickUp = true;
         }
@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Battery")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Battery"))
         {
             canPickUp = false;
         }

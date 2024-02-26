@@ -9,6 +9,9 @@ public class MetalPad : MonoBehaviour
     public GameObject attachedObject;
     Color32 wireColorOn = new Color32(0xF9, 0xC2, 0x2B, 0xFF);
 
+    bool sentSpark = false;
+    public GameObject sparkPrefab;
+
     private void Start()
     {
         wire = GetComponent<LineRenderer>();
@@ -31,6 +34,11 @@ public class MetalPad : MonoBehaviour
         {
             wire.SetPosition(wire.positionCount - 1, attachedObject.transform.position);
         }
+
+        if (active && !sentSpark)
+        {
+            StartCoroutine(SendSpark());
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -48,5 +56,18 @@ public class MetalPad : MonoBehaviour
         {
             active = false;
         }
+    }
+
+    IEnumerator SendSpark()
+    {
+        sentSpark = true;
+        Spark spark = GameObject.Instantiate(sparkPrefab, transform.position, Quaternion.identity).GetComponent<Spark>();
+        spark.metalPad = this;
+        for (int i = 0; i < wire.positionCount; i++)
+        {
+            spark.points.Add((Vector2)wire.GetPosition(i));
+        }
+        yield return new WaitForSeconds(1f);
+        sentSpark = false;
     }
 }

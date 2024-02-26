@@ -26,6 +26,9 @@ public class Gate : MonoBehaviour
     SpriteRenderer sr;
     int charge = 0;
 
+    bool sentSpark = false;
+    public GameObject sparkPrefab;
+
     private void Start()
     {
         wire = GetComponent<LineRenderer>();
@@ -114,6 +117,11 @@ public class Gate : MonoBehaviour
             }
             sr.sprite = sprites[active ? 1 : 0];
         }
+
+        if (active && !sentSpark)
+        {
+            StartCoroutine(SendSpark());
+        }
     }
 
     IEnumerator ChargeCooldown()
@@ -123,5 +131,17 @@ public class Gate : MonoBehaviour
         charge += on ? 1 : -1;
         charge = (int)Mathf.Clamp(charge, 0f, 5f);
         delayGateCounting = false;
+    }
+    IEnumerator SendSpark()
+    {
+        sentSpark = true;
+        Spark spark = GameObject.Instantiate(sparkPrefab, transform.position, Quaternion.identity).GetComponent<Spark>();
+        spark.gate = this;
+        for (int i = 0; i < wire.positionCount; i++)
+        {
+            spark.points.Add((Vector2)wire.GetPosition(i));
+        }
+        yield return new WaitForSeconds(1f);
+        sentSpark = false;
     }
 }

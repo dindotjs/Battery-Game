@@ -68,6 +68,7 @@ public class MetalBox : MonoBehaviour
     {
         sentSpark = true; 
         Spark spark = GameObject.Instantiate(sparkPrefab, transform.position, Quaternion.identity).GetComponent<Spark>();
+        spark.metalBox = this;
         for(int i = 0; i < wire.positionCount; i++)
         {
             spark.points.Add((Vector2)wire.GetPosition(i));

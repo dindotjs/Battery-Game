@@ -6,6 +6,8 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     ElectricInput input;
+    public GameObject door;
+    Vector2 doorDir = new Vector2(0f, -2f); //go down by this - ie. door.transform.position + doorDir;
 
     private void Start()
     {
@@ -16,12 +18,12 @@ public class Door : MonoBehaviour
     {
         if(input.on)
         {
-            GetComponent<SpriteRenderer>().color = Color.grey;
+            door.GetComponent<SpriteRenderer>().color = Color.grey;
             GetComponent<BoxCollider2D>().enabled = false;
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.white;
+            door.GetComponent<SpriteRenderer>().color = Color.white;
             GetComponent<BoxCollider2D>().enabled = true;
         }
     }

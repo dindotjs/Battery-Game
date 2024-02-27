@@ -87,7 +87,7 @@ public class Gate : MonoBehaviour
         }
         else if(type == 1)
         {
-            if(on && charge != 5 && !delayGateCounting)
+            if(on && charge != 6 && !delayGateCounting)
             {
                 StartCoroutine(ChargeCooldown());
             }
@@ -95,7 +95,7 @@ public class Gate : MonoBehaviour
             {
                 StartCoroutine(ChargeCooldown());
             }
-            if(charge == 5)
+            if(charge == 6)
             {
                 active = true;
             }
@@ -127,9 +127,9 @@ public class Gate : MonoBehaviour
     IEnumerator ChargeCooldown()
     {
         delayGateCounting = true;
-        yield return new WaitForSeconds(delayTime/5);
+        yield return new WaitForSeconds(delayTime/6);
         charge += on ? 1 : -1;
-        charge = (int)Mathf.Clamp(charge, 0f, 5f);
+        charge = (int)Mathf.Clamp(charge, 0f, 6f);
         delayGateCounting = false;
     }
     IEnumerator SendSpark()

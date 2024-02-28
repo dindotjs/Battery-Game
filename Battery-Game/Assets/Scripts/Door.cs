@@ -7,7 +7,6 @@ public class Door : MonoBehaviour
 {
     ElectricInput input;
     public GameObject door;
-    Vector2 doorDir = new Vector2(0f, -2f); //go down by this - ie. door.transform.position + doorDir;
 
     private void Start()
     {

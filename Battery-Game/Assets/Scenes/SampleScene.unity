@@ -673,7 +673,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0.375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -684,7 +684,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 1, y: 0.25}
   m_EdgeRadius: 0
 --- !u!1 &344083295
 GameObject:
@@ -933,10 +933,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0013032146
-    y: 0
-    width: 0.99565595
-    height: 0.99695116
+    x: 0.0018656716
+    y: 0.0016583748
+    width: 0.99626863
+    height: 0.99502486
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -2682,7 +2682,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -2
   m_Positions:
   - {x: -2.8676014, y: -1.2337748, z: 0}
   - {x: -5.015621, y: -1.233775, z: 0}
@@ -2808,7 +2808,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 2
   m_Sprite: {fileID: 862237133, guid: 56e17914524005f4a99c96cb981f0d4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

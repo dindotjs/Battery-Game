@@ -8,6 +8,7 @@ public class MetalBox : MonoBehaviour
     bool batteryOn;
     LineRenderer wire;
     public GameObject attachedObject;
+    Color32 wireColorOff = new Color32(0x23, 0x1B, 0x23, 0xFF);
     Color32 wireColorOn = new Color32(0xF9, 0xC2, 0x2B, 0xFF);
     public GameObject sparkPrefab;
     bool sentSpark = false;
@@ -26,8 +27,8 @@ public class MetalBox : MonoBehaviour
         }
         else
         {
-            wire.startColor = Color.black;
-            wire.endColor = Color.black;
+            wire.startColor = wireColorOff;
+            wire.endColor = wireColorOff;
         }
 
         if (batteryOn)

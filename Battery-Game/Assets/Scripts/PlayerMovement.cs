@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     bool grounded = true;
     bool onGround;
     float jumpSpeed = 11f;
-    float groundDistance = 0.55f;
+    float groundDistance = 0.57f;
     int groundLayer;
     float coyoteTime;
     static float coyoteTimeConst = 0.1f;
@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     GameObject battery;
     public GameObject batteryHolder;
     public GameObject batteryPlacer;
+    public List<Sprite> batterySprites = new List<Sprite>();
+    public SpriteRenderer batteryBottom;
     public bool canPickUp;
     public bool holdingBattery = false;
     Vector2 throwVector = new Vector2(3, 2);
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     float batteryPushback = 500f;
 
     public SpriteRenderer hands;
+    Animator anim;
 
     void Start()
     {
@@ -48,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         jumpBuffer = jumpBufferConst;
         acceleration = runSpeed;
         battery = GameObject.FindGameObjectWithTag("Battery");
+        anim = GetComponent<Animator>();
     }
 
 
@@ -56,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         PickUpBattery();
+        AnimatePlayer();
     }
 
     void FixedUpdate()
@@ -111,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.5f, Vector2.down, Mathf.Infinity, groundLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.45f, Vector2.down, Mathf.Infinity, groundLayer);
         float distance = Mathf.Abs(hit.point.y - transform.position.y);
 
         if(distance < groundDistance) { onGround = true; }
@@ -192,13 +197,53 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (holdingBattery)
-        { 
+        {
             battery.transform.position = batteryHolder.transform.position;
             hands.enabled = true;
         }
         else
         {
             hands.enabled = false;
+        }
+
+        if (canPickUp)
+        {
+            battery.GetComponent<SpriteRenderer>().sprite = batterySprites[1];
+            batteryBottom.enabled = true;
+        }
+        else
+        {
+            battery.GetComponent<SpriteRenderer>().sprite = batterySprites[0];
+            batteryBottom.enabled = false;
+        }
+    }
+
+    void AnimatePlayer()
+    {
+        Debug.Log(onGround);
+        if(Mathf.Round(rb.velocity.x * Time.deltaTime * 100f) != 0 && onGround)
+        {
+            anim.Play("RunAlt");
+            if (holdingBattery)
+            {
+                anim.speed = 0.5f;
+            }
+            else
+            {
+                anim.speed = 1f;
+            }
+        }
+        else if(!onGround && rb.velocity.y > 0)
+        {
+            anim.Play("Jump");
+        }
+        else if(!onGround && rb.velocity.y <= 0)
+        {
+            anim.Play("Fall");
+        }
+        else
+        {
+            anim.Play("Idle");
         }
     }
 

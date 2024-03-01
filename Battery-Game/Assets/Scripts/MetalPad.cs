@@ -68,6 +68,7 @@ public class MetalPad : MonoBehaviour
         {
             spark.points.Add((Vector2)wire.GetPosition(i));
         }
+        if(attachedObject != null) { spark.attachedObject = attachedObject; }
         yield return new WaitForSeconds(1f);
         sentSpark = false;
     }

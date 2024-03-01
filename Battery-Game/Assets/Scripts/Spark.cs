@@ -10,6 +10,7 @@ public class Spark : MonoBehaviour
     public MetalBox metalBox;
     public MetalPad metalPad;
     public Gate gate;
+    public GameObject attachedObject;
 
     void Update()
     {
@@ -32,6 +33,10 @@ public class Spark : MonoBehaviour
         if (gate != null)
         {
             if (!gate.active) { GameObject.Destroy(gameObject); }
+        }
+        if(attachedObject != null)
+        {
+            points[points.Count - 1] = attachedObject.transform.position;
         }
     }
 

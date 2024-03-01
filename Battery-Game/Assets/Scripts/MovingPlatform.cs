@@ -22,6 +22,7 @@ public class MovingPlatform : MonoBehaviour
     Animator anim;
 
     public List<Animator> beams = new List<Animator>();
+    float tolerence = 2500f;
 
 
     private void Start()
@@ -40,10 +41,10 @@ public class MovingPlatform : MonoBehaviour
         if(on)
         {
             transform.position = Vector2.Lerp(transform.position, endPos, Time.deltaTime * moveSpeed);
-            if(Mathf.Round(transform.position.x * 100) == Mathf.Round(endPos.x * 100) && Mathf.Round(transform.position.y * 100) == Mathf.Round(endPos.y * 100))
+            /*if(Mathf.Round(transform.position.x * 100) == Mathf.Round(endPos.x * 100) && Mathf.Round(transform.position.y * 100) == Mathf.Round(endPos.y * 100))
             {
                 transform.position = endPos;
-            }
+            }*/
             difference = (Vector2)transform.position - lastPos;
         }
         else
@@ -52,7 +53,7 @@ public class MovingPlatform : MonoBehaviour
             difference = (Vector2)transform.position - lastPos;
         }
 
-        if(Mathf.Round(difference.magnitude * 1000) == 0 && on)
+        if((Mathf.Round(transform.position.x * Time.deltaTime * tolerence) == Mathf.Round(endPos.x * Time.deltaTime * tolerence) && Mathf.Round(transform.position.y * Time.deltaTime * tolerence) == Mathf.Round(endPos.y * Time.deltaTime * tolerence)) && on)
         {
             transform.position = endPos;
             moving = false;
@@ -63,7 +64,7 @@ public class MovingPlatform : MonoBehaviour
             moving = true;
         }
 
-        if(Mathf.Round(difference.magnitude * 1000) == 0 && !on)
+        if((Mathf.Round(transform.position.x * Time.deltaTime * tolerence) == Mathf.Round(startPos.x * Time.deltaTime * tolerence) && Mathf.Round(transform.position.y * Time.deltaTime * tolerence) == Mathf.Round(startPos.y * Time.deltaTime * tolerence)) && !on)
         {
             transform.position = startPos;
             movingBack = false;
@@ -153,18 +154,16 @@ public class MovingPlatform : MonoBehaviour
 
         if((on && moving) || (!on && movingBack) )
         {
-            if(difference.y > 0)
+            for (int i = 0; i < beams.Count; i++)
             {
-                for (int i = 0; i < beams.Count; i++)
-                {
-                    beams[i].Play("BeamUp");
-                }
-            }
-            else
-            {
-                for (int i = 0; i < beams.Count; i++)
+                beams[i].speed = difference.magnitude * 450f;
+                if(difference.y > 0)
                 {
                     beams[i].Play("BeamDown");
+                }
+                else
+                {
+                    beams[i].Play("BeamUp");
                 }
             }
         }

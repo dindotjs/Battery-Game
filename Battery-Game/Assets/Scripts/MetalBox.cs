@@ -12,6 +12,8 @@ public class MetalBox : MonoBehaviour
     Color32 wireColorOn = new Color32(0xF9, 0xC2, 0x2B, 0xFF);
     public GameObject sparkPrefab;
     bool sentSpark = false;
+    bool flashed = false;
+    public List<Sprite> sprites = new List<Sprite>();
 
     private void Start()
     {
@@ -27,6 +29,7 @@ public class MetalBox : MonoBehaviour
         }
         else
         {
+            flashed = false;
             wire.startColor = wireColorOff;
             wire.endColor = wireColorOff;
         }
@@ -44,6 +47,11 @@ public class MetalBox : MonoBehaviour
         if(active && !sentSpark)
         {
             StartCoroutine(SendSpark());
+        }
+
+        if(active && !flashed)
+        {
+            StartCoroutine(Flash());
         }
     }
 
@@ -65,6 +73,13 @@ public class MetalBox : MonoBehaviour
         }
     }
 
+    IEnumerator Flash()
+    {
+        flashed = true;
+        GetComponent<SpriteRenderer>().sprite = sprites[1]; 
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<SpriteRenderer>().sprite = sprites[0];
+    }
     IEnumerator SendSpark()
     {
         sentSpark = true; 
@@ -74,6 +89,7 @@ public class MetalBox : MonoBehaviour
         {
             spark.points.Add((Vector2)wire.GetPosition(i));
         }
+        if (attachedObject != null) { spark.attachedObject = attachedObject; }
         yield return new WaitForSeconds(1f);
         sentSpark = false;
     }

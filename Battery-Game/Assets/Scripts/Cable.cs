@@ -55,7 +55,8 @@ public class Cable : MonoBehaviour
         
         UpdatePoints();
         lengths[lengths.Count - 1] = (points[points.Count - 1] - points[points.Count - 2]).magnitude;
-        if(lengths.Count > 2)
+        lengths[0] = (points[1] - points[0]).magnitude;
+        if (lengths.Count > 2)
         {
             lengths[lengths.Count-2] = (points[points.Count-2] - points[points.Count-3]).magnitude;
         }

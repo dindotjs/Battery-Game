@@ -100,7 +100,7 @@ public class Gate : MonoBehaviour
             {
                 active = true;
             }
-            else if(charge == 0)
+            else
             {
                 active = false;
             }

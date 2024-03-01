@@ -96,11 +96,6 @@ public class Cable : MonoBehaviour
             line.positionCount++;
             lengths.Add(0f);
             return;
-            /*baseLength = 0f;
-            for(int i = 0; i < lengths.Count-1; i++)
-            {
-                baseLength += lengths[i];
-            }*/
         }
 
         //check from battery

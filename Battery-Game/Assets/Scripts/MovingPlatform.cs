@@ -16,17 +16,26 @@ public class MovingPlatform : MonoBehaviour
     bool batteryOn;
     GameObject player;
     GameObject battery;
-    Vector2 playerVelocity;
-    Vector2 velocity;
+
+    bool moving = false;
+    bool movingBack = false;
+    Animator anim;
+
+    public List<Animator> beams = new List<Animator>();
+
 
     private void Start()
     {
         startPos = transform.position;
         input = GetComponent<ElectricInput>();
+        anim = GetComponent<Animator>();
+        difference = Vector2.zero;
     }
     void Update()
     {
         on = input.on; 
+
+
         
         if(on)
         {
@@ -43,6 +52,28 @@ public class MovingPlatform : MonoBehaviour
             difference = (Vector2)transform.position - lastPos;
         }
 
+        if(Mathf.Round(difference.magnitude * 1000) == 0 && on)
+        {
+            transform.position = endPos;
+            moving = false;
+            difference = (Vector2)transform.position - lastPos;
+        }
+        else
+        {
+            moving = true;
+        }
+
+        if(Mathf.Round(difference.magnitude * 1000) == 0 && !on)
+        {
+            transform.position = startPos;
+            movingBack = false;
+            difference = (Vector2)transform.position - lastPos;
+        }
+        else
+        {
+            movingBack = true;
+        }
+
         lastPos = transform.position;
 
 
@@ -57,6 +88,8 @@ public class MovingPlatform : MonoBehaviour
             battery.transform.position += (Vector3)difference;
 
         }
+
+        AnimatePlatform();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -82,6 +115,65 @@ public class MovingPlatform : MonoBehaviour
         else if (collision.gameObject.tag == "Battery")
         {
             batteryOn = false;
+        }
+    }
+
+    void AnimatePlatform()
+    {
+        if (on && moving)
+        {
+            if (difference.y > 0)
+            {
+                anim.Play("PlatformMoving");
+            }
+            else
+            {
+                anim.Play("PlatformDown");
+            }
+        }   
+        else if(!on && movingBack)
+        {
+            if (difference.y > 0)
+            {
+                anim.Play("PlatformMoving");
+            }
+            else
+            {
+                anim.Play("PlatformDown"); // change to up/down
+            }
+        }
+        else if (on)
+        {
+            anim.Play("PlatformOn");
+        }
+        else
+        {
+            anim.Play("PlatformStill");
+        }
+
+        if((on && moving) || (!on && movingBack) )
+        {
+            if(difference.y > 0)
+            {
+                for (int i = 0; i < beams.Count; i++)
+                {
+                    beams[i].Play("BeamUp");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < beams.Count; i++)
+                {
+                    beams[i].Play("BeamDown");
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < beams.Count; i++)
+            {
+                beams[i].Play("StillBeam");
+            }
         }
     }
 }

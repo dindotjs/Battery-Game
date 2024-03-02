@@ -10,6 +10,7 @@ public class Cable : MonoBehaviour
     public GameObject player;
     public GameObject battery;
     public List<Vector2> points = new List<Vector2>();
+    int pointCount = 2;
     public List<Vector2> visualPoints = new List<Vector2>();
     List<float> lengths = new List<float>();
     public List<GameObject> attachedObject = new List<GameObject>();
@@ -49,7 +50,6 @@ public class Cable : MonoBehaviour
             ResetPoints();
         }
 
-
         AddTension();
         if(points.Count > 2) { RemoveTension(); }
         
@@ -64,6 +64,7 @@ public class Cable : MonoBehaviour
         CheckCurrent();
         PullPlayer();
         AnimateBar();
+        pointCount = points.Count();
     }
 
     void UpdatePoints()
@@ -77,10 +78,35 @@ public class Cable : MonoBehaviour
             line.SetPosition(i, visualPoints[i]);
         }
     }
+
+    /*void AddTensioni(int i) //i starts from 1
+    {
+        Vector2 direction = (points[i - 1] - points[i]).normalized;
+        float distance = (points[i - 1] - points[i]).magnitude;
+        RaycastHit2D hit = Physics2D.Raycast(points[i], direction, distance, hittable);
+        if (hit.collider != null)
+        {
+            if (Mathf.Round(hit.point.x * 100) == Mathf.Round(points[i - 1].x * 100) && Mathf.Round(hit.point.y * 100) == Mathf.Round(points[i - 1].y * 100)) { return; }
+            Vector2 newPoint = hit.point + hit.normal * outLength;
+
+            visualPoints.Insert(i - 1, newPoint);
+            points.Insert(i - 1, newPoint);
+            attachedObject.Insert(i - 1, hit.collider.gameObject);
+            lengths.Insert(i - 1, 0f);
+
+            //visualPoints[visualPoints.Count - 1] = hit.point;
+            //points[points.Count - 1] = newPoint;
+            //attachedObject[attachedObject.Count - 1] = hit.collider.gameObject;
+            //visualPoints.Add(player.transform.position);
+            //points.Add(player.transform.position);
+            //attachedObject.Add(player);
+            line.positionCount++;
+            //lengths.Add(0f);
+            
+        }
+    }*/
     void AddTension()
     {
-        //todo - add/remove tension from battery to closest point
-
         Vector2 direction = (points[points.Count - 2] - points[points.Count - 1]).normalized;
         float distance = (points[points.Count - 2] - points[points.Count - 1]).magnitude;
         RaycastHit2D hit = Physics2D.Raycast(points[points.Count - 1], direction, distance, hittable);
@@ -173,6 +199,13 @@ public class Cable : MonoBehaviour
             {
                 points[i] += attachedObject[i].GetComponent<MovingPlatform>().difference;
                 visualPoints[i] += attachedObject[i].GetComponent<MovingPlatform>().difference;
+                lengths[i - 1] = (points[i] - points[i - 1]).magnitude;
+                lengths[i] = (points[i + 1] - points[i]).magnitude;
+            }
+            if (attachedObject[i].GetComponent<DoorBody>() != null)
+            {
+                points[i] += attachedObject[i].GetComponent<DoorBody>().difference;
+                visualPoints[i] += attachedObject[i].GetComponent<DoorBody>().difference;
                 lengths[i - 1] = (points[i] - points[i - 1]).magnitude;
                 lengths[i] = (points[i + 1] - points[i]).magnitude;
             }

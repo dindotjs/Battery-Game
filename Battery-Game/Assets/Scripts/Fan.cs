@@ -9,7 +9,8 @@ public class Fan : MonoBehaviour
     float maxSpeed = 10f;
    public int inFan = 0;
     GameObject player;
-    public SpriteRenderer effect;
+    public ParticleSystem effect;
+    public SpriteMask mask;
     ElectricInput input;
     bool on;
     Animator anim;
@@ -24,8 +25,16 @@ public class Fan : MonoBehaviour
     private void Update()
     {
         on = input.on;
-        effect.enabled = on;
-
+        mask.enabled = on;
+        //effect.enabled = on;
+        /*if(on)
+        {
+            effect.Play();
+        }
+        else
+        {
+            effect.Stop();
+        }*/
         if(inFan > 0 && player.GetComponent<Rigidbody2D>().velocity.y < maxSpeed)
         {
             if (on) { player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * strength * Time.deltaTime); }

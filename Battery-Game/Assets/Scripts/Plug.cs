@@ -20,7 +20,7 @@ public class Plug : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            StartCoroutine(levelManager.LoadScene(0));
+            StartCoroutine(levelManager.LoadScene(levelManager.currentScene + 1));
         }
     }
 }

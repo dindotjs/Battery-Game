@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: b475a6c7e187e3e45a2413680fbbd157, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e1acca71cb79aa4ca71a6ecb9b7eb0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,6 +102,9 @@ MonoBehaviour:
   active: 0
   attachedObject: {fileID: 0}
   sparkPrefab: {fileID: 5400201402519517843, guid: 36bb528a5ea4e5a44894c4200d3d5c38, type: 3}
+  sprites:
+  - {fileID: 34641559, guid: 3ebfb27d406de9944aa41399c2b4cf29, type: 3}
+  - {fileID: 21300000, guid: 5353311944f89c54380981b19e560bb4, type: 3}
 --- !u!61 &4139511944645853810
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +171,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -2
   m_Positions:
   - {x: -2.5, y: 2, z: 0}
   - {x: -2.5, y: -1.25, z: 0}

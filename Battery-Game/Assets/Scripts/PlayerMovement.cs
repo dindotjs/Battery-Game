@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 throwVector = new Vector2(3, 2);
     float throwVelocity = 8f;
     float batteryPushback = 500f;
+    public BoxCollider2D hitbox;
 
     public SpriteRenderer hands;
     Animator anim;
@@ -183,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
             int direction = transform.rotation == Quaternion.Euler(0f, 0f, 0) ? 1 : -1;
             holdingBattery = false;
             battery.layer = LayerMask.NameToLayer("Battery");
-            GetComponent<BoxCollider2D>().enabled = false;
+            hitbox.enabled = false;
             battery.GetComponent<Rigidbody2D>().velocity = new Vector2(throwVector.normalized.x * throwVelocity * direction + rb.velocity.x, throwVector.normalized.y * throwVelocity + rb.velocity.y);
             rb.AddForce(new Vector2(-throwVector.normalized.x * direction * batteryPushback, -throwVector.normalized.y * batteryPushback));
         }
@@ -193,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
             holdingBattery = true;
             canPickUp = false;
             battery.layer = LayerMask.NameToLayer("HeldBattery");
-            GetComponent<BoxCollider2D>().enabled = true;
+            hitbox.enabled = true;
         }
 
         if (holdingBattery)

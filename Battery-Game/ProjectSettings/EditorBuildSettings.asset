@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BaseLevel.unity
     guid: ab2028354b461da43a5e4812a328260f
+  - enabled: 1
+    path: Assets/Scenes/Tutorial1.unity
+    guid: 3f43f627f959e1c48be129739a2443fe
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: b88c3e21f1a1ccb4aa8c58de27c48294
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: aff7a9e06ca38c7478f890aa4361e00e
+  - enabled: 1
+    path: Assets/Scenes/ChargeLatch.unity
+    guid: 174e8f68481f68641848d136d816bb0a
   m_configObjects: {}

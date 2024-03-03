@@ -656,10 +656,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0006203474
-    y: 0.0033076075
-    width: 0.99875927
-    height: 0.9922823
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -2616,6 +2616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7319cb6e3d725940b04c053580d79a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScene: 0
 --- !u!4 &1631067533
 Transform:
   m_ObjectHideFlags: 0
@@ -2838,6 +2839,64 @@ Transform:
   m_Father: {fileID: 1460338372}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1763376604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763376605}
+  - component: {fileID: 1763376606}
+  m_Layer: 12
+  m_Name: BatteryHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1763376605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763376604}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1815427931}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1763376606
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763376604}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.012088478, y: 1.060771}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.4}
+    oldSize: {x: 1.25, y: 1.25}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9274694, y: 0.38950497}
+  m_EdgeRadius: 0
 --- !u!1 &1787779284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,6 +3050,7 @@ MonoBehaviour:
   batteryBottom: {fileID: 1647971436}
   canPickUp: 0
   holdingBattery: 0
+  hitbox: {fileID: 1763376606}
   hands: {fileID: 2128944966}
 --- !u!50 &1815427928
 Rigidbody2D:
@@ -3097,6 +3157,7 @@ Transform:
   - {fileID: 1839423256}
   - {fileID: 1852799231}
   - {fileID: 2128944965}
+  - {fileID: 1763376605}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

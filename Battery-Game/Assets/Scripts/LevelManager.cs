@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
-    List<string> scenes = new List<string>{ "SampleScene", "BaseLevel" };
+    List<string> scenes = new List<string>{ "Tutorial1", "Level1", "Level2", "GateTutorial", "ChargeLatch", "BaseLevel", "SampleScene"};
     public int currentScene;
 
     private void Awake()
@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour {
 
     public IEnumerator LoadScene(int index) 
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         currentScene = index;
         SceneManager.LoadScene(scenes[index]);
     }

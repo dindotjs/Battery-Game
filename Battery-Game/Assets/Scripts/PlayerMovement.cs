@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
             spaceDown = true;
             jumpBuffer = jumpBufferConst;
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 2f * resistance;
         }
 
-        if (rb.velocity.y <= 0f || !Input.GetKey(KeyCode.Space))
+        if (rb.velocity.y <= 0f || (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.W)))
         {
             jumping = false;
             rb.gravityScale = 4f * resistance;

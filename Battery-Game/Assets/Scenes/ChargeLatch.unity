@@ -464,7 +464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9028857007005737903, guid: 109603eb8d158774cbf0b0e3fb163b37, type: 3}
       propertyPath: delayTime
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 9028857007005737903, guid: 109603eb8d158774cbf0b0e3fb163b37, type: 3}
       propertyPath: gateInput

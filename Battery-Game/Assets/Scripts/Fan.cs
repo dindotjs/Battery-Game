@@ -37,6 +37,7 @@ public class Fan : MonoBehaviour
         }*/
         if(inFan > 0 && player.GetComponent<Rigidbody2D>().velocity.y < maxSpeed)
         {
+            if(on && player.GetComponent<Rigidbody2D>().velocity.y < 0 && player.transform.position.y - transform.position.y < 2) { player.GetComponent<Rigidbody2D>().velocity = new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 0f); }
             if (on) { player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * strength * Time.deltaTime); }
         }
         Animate();

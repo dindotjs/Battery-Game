@@ -43,7 +43,7 @@ public class MetalPad : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Battery")
+        if (collision.gameObject.tag == "Battery" && collision.gameObject.layer != LayerMask.NameToLayer("HeldBattery"))
         {
             active = true;
             collision.gameObject.transform.position = transform.position;

@@ -35,4 +35,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MovingPlatIntro.unity
     guid: dba98ffab23d9a14c897cd41f0afe14e
+  - enabled: 1
+    path: Assets/Scenes/AndTutorial.unity
+    guid: 198697d0c73c91a4bb3b008ab45386ad
+  - enabled: 1
+    path: Assets/Scenes/DelayTutorial.unity
+    guid: 9021bf43c025c244bb1a129574b599ff
+  - enabled: 1
+    path: Assets/Scenes/NotTutorial.unity
+    guid: 33a4c29240357054c9222d83eebe3d0c
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 569136c5015a5924b8030f1ee47c9c5a
   m_configObjects: {}

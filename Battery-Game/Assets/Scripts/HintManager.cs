@@ -14,7 +14,10 @@ public class HintManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        for(int i = 0; i < hintBoxes.Count; i++)
+        {
+            hintBoxes[i].enabled = false;
+        }
     }
 
     // Update is called once per frame

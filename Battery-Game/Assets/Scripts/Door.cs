@@ -21,13 +21,13 @@ public class Door : MonoBehaviour
     {
         if(input.on)
         {
-            door.transform.position = Vector2.Lerp(door.transform.position, orgin + end, doorSpeed * Time.deltaTime);
+            door.transform.localPosition = Vector2.Lerp(door.transform.localPosition, end, doorSpeed * Time.deltaTime);
             //door.GetComponent<SpriteRenderer>().color = Color.grey;
             door.GetComponent<BoxCollider2D>().enabled = false;
         }
         else
         {
-            door.transform.position = Vector2.Lerp(door.transform.position, orgin, doorSpeed * Time.deltaTime);
+            door.transform.localPosition = Vector2.Lerp(door.transform.localPosition, Vector2.zero, doorSpeed * Time.deltaTime);
             //door.GetComponent<SpriteRenderer>().color = Color.white;
             door.GetComponent<BoxCollider2D>().enabled = true;
         }

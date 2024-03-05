@@ -159,7 +159,7 @@ public class Cable : MonoBehaviour
                 RaycastHit2D hit2 = Physics2D.Raycast(points[points.Count - 1], direction2, distance2, hittable);
                 bool close = Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence) && Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence);
                 //bool close = (hit2.point.x + tolerence < midPoint.x || hit2.point.x - tolerence > midPoint.x) && (hit2.point.y + tolerence < midPoint.y || hit2.point.y - tolerence > midPoint.y);
-                Debug.DrawRay(points[points.Count - 1], direction2 * distance2, Color.red, 2f); //not raycasting to right point :(
+                Debug.DrawRay(points[points.Count - 1], direction2 * distance2, Color.red, 2f); 
                 if (hit2.collider != null) { if (!close) { return; } }
             }
 

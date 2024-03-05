@@ -550,6 +550,10 @@ PrefabInstance:
       propertyPath: padInput
       value: 
       objectReference: {fileID: 384229630}
+    - target: {fileID: 9028857007005737903, guid: 109603eb8d158774cbf0b0e3fb163b37, type: 3}
+      propertyPath: delayTime
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 109603eb8d158774cbf0b0e3fb163b37, type: 3}
 --- !u!1001 &1032052061
@@ -796,6 +800,10 @@ PrefabInstance:
     - target: {fileID: 9028857007005737903, guid: 109603eb8d158774cbf0b0e3fb163b37, type: 3}
       propertyPath: padInput
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028857007005737903, guid: 109603eb8d158774cbf0b0e3fb163b37, type: 3}
+      propertyPath: delayTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9028857007005737903, guid: 109603eb8d158774cbf0b0e3fb163b37, type: 3}
       propertyPath: gateInput

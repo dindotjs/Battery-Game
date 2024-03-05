@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
-    List<string> scenes = new List<string>{ "Tutorial1", "Level1", "Level2", "GateTutorial", "NotTutorial", "AndTutorial", "ChargeLatch", "MovingPlatIntro", "Level3", "BaseLevel", "SampleScene"};
+    List<string> scenes = new List<string>{ "Tutorial1", "Level1", "Level2", "GateTutorial", "NotTutorial", "AndTutorial", "DelayTutorial", "ChargeLatch", "MovingPlatIntro", "Level3", "BaseLevel", "SampleScene"};
     public int currentScene;
 
     private void Awake()

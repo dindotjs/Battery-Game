@@ -5,7 +5,8 @@ using UnityEngine;
 public class ButtonIcon : MonoBehaviour
 {
     public List<Sprite> sprites = new List<Sprite>(2);
-    float delay = 0.5f;
+    public float upDelay = 0.5f;
+    public float downDelay = 0.5f;
     bool changingSprite = false;
     int currentSprite;
     Transform player;
@@ -40,6 +41,7 @@ public class ButtonIcon : MonoBehaviour
     IEnumerator NextSprite()
     {
         changingSprite = true;
+        float delay = currentSprite == 0 ? downDelay : upDelay;
         yield return new WaitForSeconds(delay);
         currentSprite++;
         if(currentSprite > 1) { currentSprite = 0; }

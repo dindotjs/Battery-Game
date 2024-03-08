@@ -7,6 +7,7 @@ public class ElectricInput : MonoBehaviour
     public MetalPad metalPad;
     public MetalBox metalBox;
     public Gate gate;
+    public Wire wire;
     public bool on;
 
     void Update()
@@ -22,6 +23,10 @@ public class ElectricInput : MonoBehaviour
         else if (gate != null) 
         {
             on = gate.active;
+        }
+        else if (wire != null)
+        {
+            on = wire.active;
         }
     }
 }

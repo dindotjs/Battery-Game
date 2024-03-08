@@ -10,9 +10,11 @@ public class Gate : MonoBehaviour
     public MetalPad padInput;
     public MetalBox boxInput;
     public Gate gateInput;
+    public Wire wireInput;
     public MetalPad padInput2;
     public MetalBox boxInput2;
     public Gate gateInput2;
+    public Wire wireInput2;
     // 0 = not | 1 = delay | 2 = and 
     public int type;
     public float delayTime = 1f;
@@ -61,8 +63,12 @@ public class Gate : MonoBehaviour
         {
             on = gateInput.active;
         }
+        else if (wireInput != null)
+        {
+            on = wireInput.active;
+        }
 
-        if(padInput2 != null)
+        if (padInput2 != null)
         {
             on2 = padInput2.active;
         }
@@ -74,8 +80,12 @@ public class Gate : MonoBehaviour
         {
             on2 = gateInput2.active;
         }
+        else if (wireInput2 != null)
+        {
+            on2 = wireInput2.active;
+        }
 
-        if(attachedObject != null)
+        if (attachedObject != null)
         {
             wire.SetPosition(wire.positionCount - 1, attachedObject.transform.position);
         }

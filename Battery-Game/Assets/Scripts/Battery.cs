@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
-    /*
+
+    public AudioSource hitSound;
+    public bool justThrown = false;
+
+    private void Update()
+    {
+        if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) > 4f) { justThrown = true; }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground") && gameObject.layer == LayerMask.NameToLayer("HeldBattery"))
+        if (justThrown)
         {
-            gameObject.layer = LayerMask.NameToLayer("Battery");
+            justThrown = false;
+            SoundManager.PlaySoundRandom(hitSound, 0.95f, 1f);
         }
     }
-    */
+    
 }

@@ -32,6 +32,9 @@ public class Gate : MonoBehaviour
     bool sentSpark = false;
     public GameObject sparkPrefab;
 
+    bool playing = false;
+    bool fading = false;
+
     private void Start()
     {
         wire = GetComponent<LineRenderer>();
@@ -98,6 +101,28 @@ public class Gate : MonoBehaviour
         }
         else if(type == 1)
         {
+            if(on && charge != 6)
+            {
+                if(!playing)
+                {
+                    fading = false;
+                    GetComponent<AudioSource>().volume = 0.3f;
+                    GetComponent<AudioSource>().time = GetComponent<AudioSource>().clip.length * charge / 6;
+                    GetComponent<AudioSource>().Play();
+                    playing = true;
+                }
+            }
+            if(!on || charge == 6)
+            {
+                fading = true;
+                playing = false;
+            }
+
+            if(fading)
+            {
+                GetComponent<AudioSource>().volume -= 2f * Time.deltaTime;
+            }
+
             if(on && charge != 6 && !delayGateCounting)
             {
                 StartCoroutine(ChargeCooldown());

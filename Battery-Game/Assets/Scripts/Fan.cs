@@ -24,6 +24,15 @@ public class Fan : MonoBehaviour
 
     private void Update()
     {
+        if(!on && input.on)
+        {
+            GetComponent<AudioSource>().Play();
+        }
+        else if(on && !input.on)
+        {
+            GetComponent<AudioSource>().Pause();
+        }
+        GetComponent<AudioSource>().volume = Mathf.Clamp(10f - (player.transform.position - transform.position).magnitude, 0f, 5f) * 0.06f;
         on = input.on;
         mask.enabled = on;
         //effect.enabled = on;

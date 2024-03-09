@@ -5,6 +5,7 @@ using UnityEngine;
 public class MetalBox : MonoBehaviour
 {
     public bool active;
+    bool activeLastFrame;
     bool batteryOn;
     LineRenderer wire;
     public GameObject attachedObject;
@@ -14,6 +15,7 @@ public class MetalBox : MonoBehaviour
     bool sentSpark = false;
     bool flashed = false;
     public List<Sprite> sprites = new List<Sprite>();
+    public AudioSource onsfx;
 
     private void Start()
     {
@@ -22,6 +24,11 @@ public class MetalBox : MonoBehaviour
 
     private void Update()
     {
+        if(active && !activeLastFrame)
+        {
+            SoundManager.PlaySoundRandom(onsfx, 0.95f, 1.05f);
+        }
+
         if (active)
         {
             wire.startColor = wireColorOn;
@@ -53,6 +60,8 @@ public class MetalBox : MonoBehaviour
         {
             StartCoroutine(Flash());
         }
+
+        activeLastFrame = active;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

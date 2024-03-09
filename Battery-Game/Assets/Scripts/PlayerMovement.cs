@@ -44,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer hands;
     Animator anim;
 
+    public AudioSource jump;
+    public AudioSource walk;
+    public AudioSource pickupBattery;
+    bool canLand = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -120,7 +125,12 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.45f, Vector2.down, Mathf.Infinity, groundLayer);
         float distance = Mathf.Abs(hit.point.y - transform.position.y);
 
-        if(distance < groundDistance) { onGround = true; }
+        if (rb.velocity.y < -5f) { canLand = true;  }
+
+        if(distance < groundDistance) {
+            if (!onGround && canLand ) { SoundManager.PlaySoundRandom(walk, 0.7f, 0.8f); canLand = false; }
+            onGround = true; 
+        }
         else { onGround = false; }
 
         if (onGround)
@@ -155,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (spaceDown && grounded && !jumping)
         {
+            SoundManager.PlaySoundRandom(jump, 0.9f, 1.1f);
             coyoteTime = 0f;
             jumpBuffer = 0f;
             jumping = true;
@@ -187,10 +198,12 @@ public class PlayerMovement : MonoBehaviour
             hitbox.enabled = false;
             battery.GetComponent<Rigidbody2D>().velocity = new Vector2(throwVector.normalized.x * throwVelocity * direction + rb.velocity.x, throwVector.normalized.y * throwVelocity + rb.velocity.y);
             rb.AddForce(new Vector2(-throwVector.normalized.x * direction * batteryPushback, -throwVector.normalized.y * batteryPushback));
+            battery.GetComponent<Battery>().justThrown = true;
         }
 
         else if (canPickUp && !holdingBattery && Input.GetKeyDown(KeyCode.E))
         {
+            SoundManager.PlaySound(pickupBattery);
             holdingBattery = true;
             canPickUp = false;
             battery.layer = LayerMask.NameToLayer("HeldBattery");

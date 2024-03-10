@@ -27,7 +27,7 @@ public class Gate : MonoBehaviour
 
     public List<Sprite> sprites = new List<Sprite>();
     SpriteRenderer sr;
-    int charge = 0;
+    public int charge = 0;
 
     bool sentSpark = false;
     public GameObject sparkPrefab;

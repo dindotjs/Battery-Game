@@ -32,7 +32,7 @@ public class Fan : MonoBehaviour
         {
             GetComponent<AudioSource>().Pause();
         }
-        GetComponent<AudioSource>().volume = Mathf.Clamp(10f - (player.transform.position - transform.position).magnitude, 0f, 5f) * 0.06f;
+        GetComponent<AudioSource>().volume = Mathf.Clamp(10f - (player.transform.position - transform.position).magnitude, 0f, 5f) * 0.12f;
         on = input.on;
         mask.enabled = on;
         //effect.enabled = on;

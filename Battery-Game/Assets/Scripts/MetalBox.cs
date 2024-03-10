@@ -5,8 +5,7 @@ using UnityEngine;
 public class MetalBox : MonoBehaviour
 {
     public bool active;
-    bool activeLastFrame;
-    bool batteryOn;
+    public bool batteryOn = false;
     LineRenderer wire;
     public GameObject attachedObject;
     Color32 wireColorOff = new Color32(0x23, 0x1B, 0x23, 0xFF);
@@ -16,18 +15,18 @@ public class MetalBox : MonoBehaviour
     bool flashed = false;
     public List<Sprite> sprites = new List<Sprite>();
     public AudioSource onsfx;
+    public ParticleSystem particles;
+    public Vector2 particlePos;
+    public Vector2 particleNormal;
 
     private void Start()
     {
         wire = GetComponent<LineRenderer>();
+        particles.Stop();
     }
 
     private void Update()
     {
-        if(active && !activeLastFrame)
-        {
-            SoundManager.PlaySoundRandom(onsfx, 0.95f, 1.05f);
-        }
 
         if (active)
         {
@@ -60,14 +59,14 @@ public class MetalBox : MonoBehaviour
         {
             StartCoroutine(Flash());
         }
-
-        activeLastFrame = active;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Battery" && collision.gameObject.layer != LayerMask.NameToLayer("HeldBattery"))
         {
+            particlePos = (Vector2)transform.position + Vector2.up * 0.5f;
+            particleNormal = Vector2.up;
             batteryOn = true;
             active = true;
         }
@@ -84,7 +83,11 @@ public class MetalBox : MonoBehaviour
 
     IEnumerator Flash()
     {
+        particles.transform.position = particlePos;
+        particles.transform.rotation = Quaternion.Euler(0f, 0f, Vector2.Angle(Vector2.zero, particleNormal));
+        particles.Play();
         flashed = true;
+        SoundManager.PlaySoundRandom(onsfx, 0.95f, 1.05f);
         GetComponent<SpriteRenderer>().sprite = sprites[1]; 
         yield return new WaitForSeconds(0.2f);
         GetComponent<SpriteRenderer>().sprite = sprites[0];

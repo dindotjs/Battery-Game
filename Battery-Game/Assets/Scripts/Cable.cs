@@ -122,6 +122,13 @@ public class Cable : MonoBehaviour
             attachedObject.Add(player);
             line.positionCount++;
             lengths.Add(0f);
+
+            if (hit.collider.GetComponent<MetalBox>() != null)
+            {
+                hit.collider.GetComponent<MetalBox>().particlePos = hit.point;
+                hit.collider.GetComponent<MetalBox>().particleNormal = hit.normal;
+            }
+
             return;
         }
 
@@ -139,6 +146,12 @@ public class Cable : MonoBehaviour
             attachedObject.Insert(1, hit.collider.gameObject);
             line.positionCount++;
             lengths.Insert(1, 0f);
+
+            if(hit.collider.GetComponent<MetalBox>() != null)
+            {
+                hit.collider.GetComponent<MetalBox>().particlePos = hit.point;
+                hit.collider.GetComponent<MetalBox>().particleNormal = hit.normal;
+            }
         }
     }
     void RemoveTension()
@@ -167,7 +180,7 @@ public class Cable : MonoBehaviour
             points[points.Count - 2] = points[points.Count - 1];
             if (attachedObject[attachedObject.Count - 2].GetComponent<MetalBox>() != null) 
             {
-                attachedObject[attachedObject.Count - 2].GetComponent<MetalBox>().active = false;
+                if (!attachedObject[attachedObject.Count - 2].GetComponent<MetalBox>().batteryOn) { attachedObject[attachedObject.Count - 2].GetComponent<MetalBox>().active = false; }
             }
             attachedObject[attachedObject.Count - 2] = attachedObject[attachedObject.Count - 1];
             points.RemoveAt(points.Count-1);

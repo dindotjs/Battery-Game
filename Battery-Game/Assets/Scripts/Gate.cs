@@ -106,7 +106,7 @@ public class Gate : MonoBehaviour
                 if(!playing)
                 {
                     fading = false;
-                    GetComponent<AudioSource>().volume = 0.3f;
+                    GetComponent<AudioSource>().volume = 0.5f;
                     GetComponent<AudioSource>().time = GetComponent<AudioSource>().clip.length * charge / 6;
                     GetComponent<AudioSource>().Play();
                     playing = true;

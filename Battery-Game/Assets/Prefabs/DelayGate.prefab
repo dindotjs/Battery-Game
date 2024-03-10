@@ -119,6 +119,7 @@ MonoBehaviour:
   - {fileID: -1397380415, guid: 3b4d041559a7d354699bafee9e9a5bac, type: 3}
   - {fileID: -1197564335, guid: 3b4d041559a7d354699bafee9e9a5bac, type: 3}
   - {fileID: 450563722, guid: 3b4d041559a7d354699bafee9e9a5bac, type: 3}
+  charge: 0
   sparkPrefab: {fileID: 5400201402519517843, guid: 36bb528a5ea4e5a44894c4200d3d5c38, type: 3}
 --- !u!120 &9028857007005737896
 LineRenderer:
@@ -232,7 +233,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a290af1d8fae297419e758a654c818f1, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

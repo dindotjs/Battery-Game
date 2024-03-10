@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
     {
         if(GameObject.FindGameObjectsWithTag("LevelManager").Length > 1)
         {
-            GameObject.Destroy(gameObject);
+            Destroy(gameObject);
         }
 
         DontDestroyOnLoad(this.gameObject);

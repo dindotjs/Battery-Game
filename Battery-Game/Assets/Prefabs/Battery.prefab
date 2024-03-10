@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 4100798380655342507}
+  justThrown: 0
 --- !u!61 &3326237288721309732
 BoxCollider2D:
   m_ObjectHideFlags: 0

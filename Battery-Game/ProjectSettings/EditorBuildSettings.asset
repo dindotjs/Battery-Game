@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level5.unity
     guid: 8e462ff1b3d088541b0fe3f060c12e5d
+  - enabled: 1
+    path: Assets/Scenes/HintReset.unity
+    guid: 464dcd538e49fd043a8a09d48ccfdbfe
   m_configObjects: {}

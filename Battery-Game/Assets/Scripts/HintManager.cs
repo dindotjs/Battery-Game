@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HintManager : MonoBehaviour
 {
-    public float showTime;
-    bool showing = false;
+    float showTime = 3f;
+    public bool showing = false;
     public List<SpriteRenderer> hintBoxes = new List<SpriteRenderer>();
     public List<int> indexes = new List<int>();
     public List<HintTrigger> hintTriggers = new List<HintTrigger>();

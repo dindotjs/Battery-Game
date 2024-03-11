@@ -20,6 +20,7 @@ public class HintTrigger : MonoBehaviour
             if(other.gameObject.tag == "Player" && hintManager.hintTriggers[hintManager.currentBox] == GetComponent<HintTrigger>())
             {
                 hintManager.currentBox++;
+                hintManager.showing = false;
             }
         }
     }

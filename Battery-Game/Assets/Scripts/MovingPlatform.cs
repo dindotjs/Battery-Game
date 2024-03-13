@@ -134,7 +134,7 @@ public class MovingPlatform : MonoBehaviour
     IEnumerator MakeNoise()
     {
         madeNoise = true;
-        yield return new WaitForSeconds(0.000001f/(difference.magnitude * Time.deltaTime));
+        yield return new WaitForSeconds((0.3f/difference.magnitude)*Time.deltaTime);
         if ((on && moving) || (!on && movingBack)) { SoundManager.PlaySoundRandom(move, 0.9f, 1.1f); }
         madeNoise = false;
     }

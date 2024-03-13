@@ -20,7 +20,13 @@ public class Plug : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            StartCoroutine(levelManager.LoadScene(levelManager.currentScene + 1));
+            other.GetComponent<SpriteRenderer>().enabled = false;
+            other.GetComponent<PlayerMovement>().plugin.enabled = true;
+            other.GetComponent<PlayerMovement>().pluggedIn = true;
+            other.transform.position = transform.position;
+            other.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+            GetComponent<AudioSource>().Play();
+            StartCoroutine(levelManager.LoadScene(levelManager.currentScene + 1, 0.5f));
         }
     }
 }

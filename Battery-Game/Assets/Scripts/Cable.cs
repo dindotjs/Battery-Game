@@ -52,6 +52,7 @@ public class Cable : MonoBehaviour
 
         AddTension();
         if(points.Count > 2) { RemoveTension(); }
+        if(points.Count > 2) { RemoveTensionFromBattery(); }
         
         UpdatePoints();
         lengths[lengths.Count - 1] = (points[points.Count - 1] - points[points.Count - 2]).magnitude;
@@ -189,8 +190,45 @@ public class Cable : MonoBehaviour
             line.positionCount--;
             lengths.RemoveAt(lengths.Count-1);
         }
+
     }
-    void PullPlayer()
+
+    void RemoveTensionFromBattery()
+    {
+        Vector2 direction = (points[2] - points[0]).normalized;
+        float distance = (points[2] - points[0]).magnitude;
+        RaycastHit2D hit = Physics2D.Raycast(points[0], direction, distance, hittable);
+        //bool pointClose = (hit.point.x + pointTolerence < points[points.Count - 3].x || hit.point.x - pointTolerence > points[points.Count - 3].x) && (hit.point.y + pointTolerence < points[points.Count - 3].y || hit.point.y - pointTolerence > points[points.Count - 3].y);
+        if (hit.collider == null)
+        {
+            for (int i = 1; i < numChecks; i++)
+            {
+                Vector2 diff = points[2] - points[1];
+                float fraction = i / numChecks;
+                Vector2 midPoint = points[1] + (fraction * diff);
+                Vector2 direction2 = (midPoint - points[0]).normalized;
+                float distance2 = (midPoint - points[0]).magnitude;
+                RaycastHit2D hit2 = Physics2D.Raycast(points[0], direction2, distance2, hittable);
+                bool close = Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence) && Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence);
+                //bool close = (hit2.point.x + tolerence < midPoint.x || hit2.point.x - tolerence > midPoint.x) && (hit2.point.y + tolerence < midPoint.y || hit2.point.y - tolerence > midPoint.y);
+                Debug.DrawRay(points[0], direction2 * distance2, Color.red, 2f);
+                if (hit2.collider != null) { if (!close) { return; } }
+            }
+
+            visualPoints[1] = points[0];
+            points[1] = points[0];
+            if (attachedObject[1].GetComponent<MetalBox>() != null)
+            {
+                if (!attachedObject[1].GetComponent<MetalBox>().batteryOn) { attachedObject[1].GetComponent<MetalBox>().active = false; }
+            }
+            points.RemoveAt(1);
+            visualPoints.RemoveAt(1);
+            attachedObject.RemoveAt(1);
+            line.positionCount--;
+            lengths.RemoveAt(0);
+        }
+    }
+        void PullPlayer()
     {
         totalLength = 0f;
         for(int i = 0; i < lengths.Count; i++)

@@ -49,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource pickupBattery;
     bool canLand = false;
 
+    public SpriteRenderer plugin;
+    public bool pluggedIn = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if(pluggedIn) { return; }
         Move();
         Jump();
         PickUpBattery();

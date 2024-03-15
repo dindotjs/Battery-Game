@@ -8,6 +8,7 @@ TagManager:
   - LevelManager
   - HintManager
   - MusicManager
+  - FadeManager
   layers:
   - Default
   - TransparentFX

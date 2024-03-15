@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2f96359349f9046a079ff2915a22f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadePrefab: {fileID: 1804886473414592371, guid: 8e7ca1493be8e5f4d935c76e6f68b1c5, type: 3}
 --- !u!61 &834596003446995363
 BoxCollider2D:
   m_ObjectHideFlags: 0

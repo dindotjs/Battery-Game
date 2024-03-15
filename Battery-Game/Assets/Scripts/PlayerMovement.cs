@@ -238,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
 
     void AnimatePlayer()
     {
-        Debug.Log(onGround);
+        //Debug.Log(onGround);
         if(Mathf.Round(rb.velocity.x * Time.deltaTime * 100f) != 0 && onGround)
         {
             anim.Play("RunAlt");

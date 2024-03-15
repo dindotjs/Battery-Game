@@ -5,8 +5,11 @@ using UnityEngine;
 public class Plug : MonoBehaviour
 {
     LevelManager levelManager;
+    public GameObject fadePrefab;
+
     void Start()
     {
+        Instantiate(fadePrefab);
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
@@ -26,7 +29,7 @@ public class Plug : MonoBehaviour
             other.transform.position = transform.position;
             other.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
             GetComponent<AudioSource>().Play();
-            StartCoroutine(levelManager.LoadScene(levelManager.currentScene + 1, 0.5f));
+            StartCoroutine(levelManager.LoadScene(levelManager.currentScene + 1, 0.8f));
         }
     }
 }

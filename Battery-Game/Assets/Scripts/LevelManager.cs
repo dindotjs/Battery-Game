@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
     List<string> scenes = new List<string>{ "Tutorial1", "Level1", "HintReset", "Level2", "NotTutorial", "AndTutorial", "Level4", "DelayTutorial", "ChargeLatch", "MovingPlatIntro", "Level3", "DoorHop", "Level5", "Level7", "Level6", "BaseLevel", "SampleScene"};
     public int currentScene;
+    public FadeManager fadeManager;
+    public bool loadingScene = false;
 
     private void Awake()
     {
@@ -23,14 +25,23 @@ public class LevelManager : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(LoadScene(currentScene, 0.1f));
+            StartCoroutine(LoadScene(currentScene, 0.8f));
         }
     }
 
     public IEnumerator LoadScene(int index, float time) 
     {
+        if(loadingScene) { yield break; }
+        loadingScene = true;
+        fadeManager = GameObject.FindGameObjectWithTag("FadeManager").GetComponent<FadeManager>();
+        if (fadeManager != null)
+        {
+            if(fadeManager.fadingOut) { loadingScene = false;  yield break; }
+            StartCoroutine(fadeManager.FadeOut());
+        }
         yield return new WaitForSeconds(time);
         currentScene = index;
+        loadingScene = false;
         SceneManager.LoadScene(scenes[index]);
     }
 }

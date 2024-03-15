@@ -1295,6 +1295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScene: 0
+  fadeManager: {fileID: 0}
+  loadingScene: 0
 --- !u!4 &1631067533
 Transform:
   m_ObjectHideFlags: 0
@@ -79216,7 +79218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dccb3b9a6983c14a95c6372a363b147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTime: 4
+  showing: 0
   hintBoxes:
   - {fileID: 1739003894655088666}
   - {fileID: 1739003894304466584}

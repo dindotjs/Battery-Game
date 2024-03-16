@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dccb3b9a6983c14a95c6372a363b147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTime: 4
+  showing: 0
   hintBoxes:
   - {fileID: 197246410}
   - {fileID: 1888679595}
@@ -1611,6 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a58261e724907d499aca54a4847050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  batteryType: 0
 --- !u!61 &1539575198
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1682,6 +1683,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScene: 0
+  fadeManager: {fileID: 0}
+  loadingScene: 0
 --- !u!4 &1631067533
 Transform:
   m_ObjectHideFlags: 0
@@ -3023,7 +3026,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 8
+      m_TileSpriteIndex: 23
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -47829,6 +47832,36 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741826
+  - first: {x: 9, y: 4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741826
+  - first: {x: 10, y: 4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 9
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741826
+  - first: {x: 11, y: 4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 23
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741826
   - first: {x: 29, y: 4, z: 0}
     second:
       serializedVersion: 2
@@ -48533,7 +48566,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 10
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -48543,7 +48576,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 9
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -48553,7 +48586,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 8
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -80225,7 +80258,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 7828
+  - m_RefCount: 7831
     m_Data: {fileID: 11400000, guid: 835e203423d1d994aa1d0f8a76dfefae, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -80254,11 +80287,11 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 157
     m_Data: {fileID: 1087321916, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
-  - m_RefCount: 93
+  - m_RefCount: 94
     m_Data: {fileID: 1511384510, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
   - m_RefCount: 554
     m_Data: {fileID: -162021935, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
-  - m_RefCount: 976
+  - m_RefCount: 977
     m_Data: {fileID: -1975293718, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
   - m_RefCount: 1263
     m_Data: {fileID: -2065766969, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
@@ -80266,10 +80299,10 @@ Tilemap:
     m_Data: {fileID: -1481130109, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
   - m_RefCount: 566
     m_Data: {fileID: 2009188969, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
-  - m_RefCount: 91
+  - m_RefCount: 92
     m_Data: {fileID: -791757664, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: -1929280695, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 147
     m_Data: {fileID: -112087718, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
   - m_RefCount: 3
@@ -80298,8 +80331,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: -134014055, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: -1929280695, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1964490281, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
   - m_RefCount: 136
@@ -80323,7 +80356,7 @@ Tilemap:
   - m_RefCount: 3
     m_Data: {fileID: 1704009949, guid: 4d278d7f18bc8e645bcac946f179f34b, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 5830
+  - m_RefCount: 5833
     m_Data:
       e00: 1
       e01: 0
@@ -80360,7 +80393,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 7828
+  - m_RefCount: 7831
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -80584,6 +80617,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6048706481214592768, guid: 83edfb4c58f6c034c87d6e17b221131c, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6048706481214592768, guid: 83edfb4c58f6c034c87d6e17b221131c, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6048706481214592768, guid: 83edfb4c58f6c034c87d6e17b221131c, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6048706481214592768, guid: 83edfb4c58f6c034c87d6e17b221131c, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6048706481214592771, guid: 83edfb4c58f6c034c87d6e17b221131c, type: 3}
       propertyPath: m_Name
       value: Main Camera

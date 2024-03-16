@@ -176,7 +176,7 @@ public class MovingPlatform : MonoBehaviour
         {
             for (int i = 0; i < beams.Count; i++)
             {
-                beams[i].speed = difference.magnitude * 450f;
+                beams[i].speed = difference.magnitude * 250000f * Time.deltaTime;
                 if(difference.y > 0)
                 {
                     beams[i].Play("BeamDown");

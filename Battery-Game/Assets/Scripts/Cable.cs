@@ -20,7 +20,7 @@ public class Cable : MonoBehaviour
     float outLength = 0.075f;
     public float midPointFactor = 0.8f;
     float numChecks = 10f;
-    float tolerence = 10f;
+    float tolerence = 5f;
 
     float forceStrength = 3000f;
     float maxLength = 20f;

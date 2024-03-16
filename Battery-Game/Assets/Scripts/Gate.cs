@@ -35,6 +35,8 @@ public class Gate : MonoBehaviour
     bool playing = false;
     bool fading = false;
 
+    public ParticleSystem particles;
+
     private void Start()
     {
         wire = GetComponent<LineRenderer>();
@@ -109,6 +111,7 @@ public class Gate : MonoBehaviour
                     GetComponent<AudioSource>().volume = 0.5f;
                     GetComponent<AudioSource>().time = GetComponent<AudioSource>().clip.length * charge / 6;
                     GetComponent<AudioSource>().Play();
+                    particles.Play();
                     playing = true;
                 }
             }
@@ -116,6 +119,7 @@ public class Gate : MonoBehaviour
             {
                 fading = true;
                 playing = false;
+                particles.Stop();
             }
 
             if(fading)

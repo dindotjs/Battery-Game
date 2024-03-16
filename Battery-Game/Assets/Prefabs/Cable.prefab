@@ -153,16 +153,16 @@ MonoBehaviour:
   midPointFactor: 0.8
   bar: {fileID: 0}
   barSprites:
-  - {fileID: -2094078033, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: 1075128148, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: 886381315, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: 700384066, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: -1738475994, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: -1892114273, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: 388779910, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: 1429954309, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: 646117886, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
-  - {fileID: 1283464437, guid: b0157bfd27d3fb34592492cc049a3463, type: 3}
+  - {fileID: 1232148669, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: -1912103987, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: -221977333, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: 1654169105, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: -495048944, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: 1425106277, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: 1504169840, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: 905223821, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: -537035995, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
+  - {fileID: -176467210, guid: 4cef16d9792aca7408b4ae2262eee1bb, type: 3}
 --- !u!1 &6434277440596486519
 GameObject:
   m_ObjectHideFlags: 0

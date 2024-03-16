@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(pluggedIn) { return; }
+        if(pluggedIn) { GetComponent<WalkSound>().playedSound = true; return; }
         Move();
         Jump();
         PickUpBattery();

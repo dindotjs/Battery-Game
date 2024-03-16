@@ -10,7 +10,7 @@ public class FadeManager : MonoBehaviour
     public List<SpriteRenderer> borders = new List<SpriteRenderer>();
     float transparency = 0f;
     float fadeRate = 50f;
-    float fadeTime = 0.05f;
+    float fadeTime = 0.025f;
     Transform player;
     public bool fadingIn = false;
     public bool fadingOut = false;

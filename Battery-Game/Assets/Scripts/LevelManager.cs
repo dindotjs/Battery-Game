@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
-    List<string> scenes = new List<string>{ "StartScreen", "Tutorial1", "Level1", "HintReset", "Level2", "NotTutorial", "AndTutorial", "Level4", "DelayTutorial", "ChargeLatch", "MovingPlatIntro", "Level3", "DoorHop", "Level5", "Level8", "Level7", "Level9", "Level6", "BaseLevel", "SampleScene"};
+    List<string> scenes = new List<string>{ "Tutorial1", "Level1", "HintReset", "Level2", "NotTutorial", "AndTutorial", "Level4", "DelayTutorial", "ChargeLatch", "MovingPlatIntro", "Level3", "DoorHop", "Level5", "Level10", "Level8", "Level7", "Level9", "Level6", "BaseLevel", "SampleScene"};
     public int currentScene;
     public FadeManager fadeManager;
     public bool loadingScene = false;

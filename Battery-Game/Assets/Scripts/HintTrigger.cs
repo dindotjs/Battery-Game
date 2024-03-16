@@ -6,6 +6,7 @@ using UnityEngine;
 public class HintTrigger : MonoBehaviour
 {
     HintManager hintManager;
+    public bool batteryType = false;
 
     void Start()
     {
@@ -17,7 +18,12 @@ public class HintTrigger : MonoBehaviour
         if (hintManager != null)
         {
             if (hintManager.currentBox >= hintManager.hintTriggers.Count) { return; }
-            if(other.gameObject.tag == "Player" && hintManager.hintTriggers[hintManager.currentBox] == GetComponent<HintTrigger>())
+            if (other.gameObject.tag == "Player" && hintManager.hintTriggers[hintManager.currentBox] == GetComponent<HintTrigger>() && !batteryType)
+            {
+                hintManager.currentBox++;
+                hintManager.showing = false;
+            }
+            if (other.gameObject.tag == "Battery" && hintManager.hintTriggers[hintManager.currentBox] == GetComponent<HintTrigger>() && batteryType)
             {
                 hintManager.currentBox++;
                 hintManager.showing = false;

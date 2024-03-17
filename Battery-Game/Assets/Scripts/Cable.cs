@@ -19,8 +19,8 @@ public class Cable : MonoBehaviour
     int hittable;
     float outLength = 0.075f;
     public float midPointFactor = 0.8f;
-    float numChecks = 10f;
-    float tolerence = 5f;
+    float numChecks = 5f;
+    float tolerence = 2.5f;
 
     float forceStrength = 3000f;
     float maxLength = 20f;
@@ -79,33 +79,6 @@ public class Cable : MonoBehaviour
             line.SetPosition(i, visualPoints[i]);
         }
     }
-
-    /*void AddTensioni(int i) //i starts from 1
-    {
-        Vector2 direction = (points[i - 1] - points[i]).normalized;
-        float distance = (points[i - 1] - points[i]).magnitude;
-        RaycastHit2D hit = Physics2D.Raycast(points[i], direction, distance, hittable);
-        if (hit.collider != null)
-        {
-            if (Mathf.Round(hit.point.x * 100) == Mathf.Round(points[i - 1].x * 100) && Mathf.Round(hit.point.y * 100) == Mathf.Round(points[i - 1].y * 100)) { return; }
-            Vector2 newPoint = hit.point + hit.normal * outLength;
-
-            visualPoints.Insert(i - 1, newPoint);
-            points.Insert(i - 1, newPoint);
-            attachedObject.Insert(i - 1, hit.collider.gameObject);
-            lengths.Insert(i - 1, 0f);
-
-            //visualPoints[visualPoints.Count - 1] = hit.point;
-            //points[points.Count - 1] = newPoint;
-            //attachedObject[attachedObject.Count - 1] = hit.collider.gameObject;
-            //visualPoints.Add(player.transform.position);
-            //points.Add(player.transform.position);
-            //attachedObject.Add(player);
-            line.positionCount++;
-            //lengths.Add(0f);
-            
-        }
-    }*/
     void AddTension()
     {
         Vector2 direction = (points[points.Count - 2] - points[points.Count - 1]).normalized;

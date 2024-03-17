@@ -1069,6 +1069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a58261e724907d499aca54a4847050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  batteryType: 0
 --- !u!61 &1373062174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1178,7 +1179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4139511944645853811, guid: 9fe588a4bce67c64bb3e80fc40b79812, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: 8.5
+      value: 8.25
       objectReference: {fileID: 0}
     - target: {fileID: 4139511944645853811, guid: 9fe588a4bce67c64bb3e80fc40b79812, type: 3}
       propertyPath: m_Positions.Array.data[1].x
@@ -79277,6 +79278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a58261e724907d499aca54a4847050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  batteryType: 0
 --- !u!1 &1739003895588848372
 GameObject:
   m_ObjectHideFlags: 0

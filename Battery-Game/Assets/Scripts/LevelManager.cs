@@ -27,6 +27,14 @@ public class LevelManager : MonoBehaviour {
         {
             StartCoroutine(LoadScene(currentScene, 0.8f));
         }
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            SceneManager.LoadScene(scenes[currentScene]);
+        }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(LoadScene(0, 0.8f));
+        }
     }
 
     public IEnumerator LoadScene(int index, float time) 

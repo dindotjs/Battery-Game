@@ -16,6 +16,7 @@ public class LevelSelectPlug : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            if(other.gameObject.GetComponent<PlayerMovement>().holdingBattery) { return; }
             other.GetComponent<SpriteRenderer>().enabled = false;
             other.GetComponent<PlayerMovement>().plugin.enabled = true;
             other.GetComponent<PlayerMovement>().pluggedIn = true;

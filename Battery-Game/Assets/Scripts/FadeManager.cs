@@ -9,7 +9,7 @@ public class FadeManager : MonoBehaviour
     Animator anim;
     public List<SpriteRenderer> borders = new List<SpriteRenderer>();
     float transparency = 0f;
-    float fadeRate = 50f;
+    float fadeRate = 0.075f;
     float fadeTime = 0.025f;
     Transform player;
     public bool fadingIn = false;
@@ -25,7 +25,7 @@ public class FadeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = player.position;
+        transform.position = new Vector3(player.position.x, player.position.y, -5f);
     }
 
     public IEnumerator TransparencyFadeIn()
@@ -33,7 +33,7 @@ public class FadeManager : MonoBehaviour
         transparency = 0f;
         while(transparency < 1f)
         {
-            transparency += fadeRate * Time.deltaTime;
+            transparency += fadeRate;
             fadeSR.color = new Color(fadeSR.color.r, fadeSR.color.g, fadeSR.color.b, transparency);
             for(int i = 0; i < borders.Count; i++)
             {
@@ -50,7 +50,7 @@ public class FadeManager : MonoBehaviour
         transparency = 1f;
         while (transparency > 0f)
         {
-            transparency -= fadeRate * Time.deltaTime;
+            transparency -= fadeRate;
             fadeSR.color = new Color(fadeSR.color.r, fadeSR.color.g, fadeSR.color.b, transparency);
             for (int i = 0; i < borders.Count; i++)
             {

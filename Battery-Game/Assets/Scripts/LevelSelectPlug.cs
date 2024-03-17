@@ -14,7 +14,7 @@ public class LevelSelectPlug : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !GameObject.FindGameObjectWithTag("FadeManager").GetComponent<FadeManager>().fadingOut)
         {
             if(other.gameObject.GetComponent<PlayerMovement>().holdingBattery) { return; }
             other.GetComponent<SpriteRenderer>().enabled = false;

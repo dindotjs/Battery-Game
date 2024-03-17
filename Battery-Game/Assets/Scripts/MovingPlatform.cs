@@ -61,6 +61,7 @@ public class MovingPlatform : MonoBehaviour
             transform.position = endPos;
             moving = false;
             difference = (Vector2)transform.position - lastPos;
+            madeNoise = false;
         }
         else
         {
@@ -73,6 +74,7 @@ public class MovingPlatform : MonoBehaviour
             transform.position = startPos;
             movingBack = false;
             difference = (Vector2)transform.position - lastPos;
+            madeNoise = false;
         }
         else
         {
@@ -134,7 +136,7 @@ public class MovingPlatform : MonoBehaviour
     IEnumerator MakeNoise()
     {
         madeNoise = true;
-        yield return new WaitForSeconds((0.3f/difference.magnitude)*Time.deltaTime);
+        yield return new WaitForSeconds((0.3f / (difference.magnitude/Time.deltaTime)));
         if ((on && moving) || (!on && movingBack)) { SoundManager.PlaySoundRandom(move, 0.9f, 1.1f); }
         madeNoise = false;
     }
@@ -176,7 +178,7 @@ public class MovingPlatform : MonoBehaviour
         {
             for (int i = 0; i < beams.Count; i++)
             {
-                beams[i].speed = difference.magnitude * 250000f * Time.deltaTime;
+                beams[i].speed = 2f;
                 if(difference.y > 0)
                 {
                     beams[i].Play("BeamDown");

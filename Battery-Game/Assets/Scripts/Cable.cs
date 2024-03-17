@@ -19,8 +19,8 @@ public class Cable : MonoBehaviour
     int hittable;
     float outLength = 0.075f;
     public float midPointFactor = 0.8f;
-    float numChecks = 5f;
-    float tolerence = 2.5f;
+    float numChecks = 10f;
+    float tolerence = 2f;
 
     float forceStrength = 3000f;
     float maxLength = 20f;
@@ -144,7 +144,12 @@ public class Cable : MonoBehaviour
                 Vector2 direction2 = (midPoint - points[points.Count - 1]).normalized;
                 float distance2 = (midPoint - points[points.Count - 1]).magnitude;
                 RaycastHit2D hit2 = Physics2D.Raycast(points[points.Count - 1], direction2, distance2, hittable);
-                bool close = Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence) && Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence);
+                bool closeff = Mathf.Floor(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence) && Mathf.Floor(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence);
+                bool closefc = Mathf.Floor(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence) && Mathf.Floor(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence);
+                bool closecf = Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence) && Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence);
+                bool closecc = Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence) && Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence);
+                bool close = closeff || closefc || closecf || closecc;
+                //bool close = Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence) && Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence);
                 //bool close = (hit2.point.x + tolerence < midPoint.x || hit2.point.x - tolerence > midPoint.x) && (hit2.point.y + tolerence < midPoint.y || hit2.point.y - tolerence > midPoint.y);
                 Debug.DrawRay(points[points.Count - 1], direction2 * distance2, Color.red, 2f); 
                 if (hit2.collider != null) { if (!close) { return; } }
@@ -182,7 +187,12 @@ public class Cable : MonoBehaviour
                 Vector2 direction2 = (midPoint - points[0]).normalized;
                 float distance2 = (midPoint - points[0]).magnitude;
                 RaycastHit2D hit2 = Physics2D.Raycast(points[0], direction2, distance2, hittable);
-                bool close = Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence) && Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence);
+                bool closeff = Mathf.Floor(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence) && Mathf.Floor(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence);
+                bool closefc = Mathf.Floor(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence) && Mathf.Floor(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence);
+                bool closecf = Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence) && Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Floor(midPoint.x * tolerence);
+                bool closecc = Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence) && Mathf.Ceil(hit2.point.x * tolerence) == Mathf.Ceil(midPoint.x * tolerence);
+                bool close = closeff || closefc || closecf || closecc;
+                //bool close = Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence) && Mathf.Round(hit2.point.x * tolerence) == Mathf.Round(midPoint.x * tolerence);
                 //bool close = (hit2.point.x + tolerence < midPoint.x || hit2.point.x - tolerence > midPoint.x) && (hit2.point.y + tolerence < midPoint.y || hit2.point.y - tolerence > midPoint.y);
                 Debug.DrawRay(points[0], direction2 * distance2, Color.red, 2f);
                 if (hit2.collider != null) { if (!close) { return; } }

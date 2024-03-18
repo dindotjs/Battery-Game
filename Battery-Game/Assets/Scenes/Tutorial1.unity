@@ -857,6 +857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Backdrop
       objectReference: {fileID: 0}
+    - target: {fileID: 4357114772630654891, guid: f7b4d5fbfe0da474e92da624b80ecd9e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2315a8fc994fe374fb1505f04e34860e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7b4d5fbfe0da474e92da624b80ecd9e, type: 3}
 --- !u!4 &862926088 stripped
